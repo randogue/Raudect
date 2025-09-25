@@ -6,4 +6,36 @@
     </style>
 
     <style name="Theme.Raudect" parent="Base.Theme.Raudect" />
+
+    <style name="Theme.NavigationDrawer.NoActionBar"
+        parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.NavigationDrawer.AppBarOverlay"
+        parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="Theme.NavigationDrawer.PopupOverlay"
+        parent="ThemeOverlay.AppCompat.Light"/>
+
+
+    <!--TODO: this is styles for fragment_input.xml-->
+    <style name="scrollView_boxed_style">
+        <item name="borderWidth">10dp</item>
+        <item name="backgroundColor">@android:color/transparent</item>
+    </style>
+    <style name="inputFragment_title_style"
+        parent="@style/TextAppearance.Material3.TitleLarge">
+        <item name="android:textSize">26sp</item>
+    </style>
+
+    <style name="inputLayout_style">
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="inputEdit_style">
+        <item name="android:textSize">15sp</item>
+    </style>
+
 </resources>
