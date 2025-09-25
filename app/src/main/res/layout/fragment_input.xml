@@ -7,7 +7,9 @@
     android:orientation="vertical"
     tools:context=".InputFragment"
     android:padding="10dp"
-    android:id="@+id/mainLayout">
+    android:id="@+id/mainLayout"
+    android:background="@color/secondary"
+    >
 
     <!-- TODO: Update blank fragment layout -->
     <ScrollView
@@ -295,9 +297,10 @@
                     android:id="@+id/button_submit"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.AppCompat.Button"
                     android:text="@string/button_submit_string"
                     android:gravity="center"
+                    android:backgroundTint="@color/tersier"
+                    android:textColor="@color/primary"
                     />
             </FrameLayout>
 

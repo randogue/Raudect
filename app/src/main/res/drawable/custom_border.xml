@@ -9,7 +9,7 @@
 
     <!--solid for background-->
     <solid
-        android:color="@android:color/transparent" />
+        android:color="@color/primary" />
 
     <padding
         android:top="0dp"

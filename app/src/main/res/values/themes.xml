@@ -3,6 +3,9 @@
     <style name="Base.Theme.Raudect" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/tersier</item>
+        <item name="colorAccent">@color/secondary</item>
+        <item name="colorTertiary">@color/primary</item>
     </style>
 
     <style name="Theme.Raudect" parent="Base.Theme.Raudect" />
@@ -36,6 +39,12 @@
 
     <style name="inputEdit_style">
         <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="button_submit_style"
+        parent="Widget.MaterialComponents.Button">
+        <item name="android:textColor">@color/white</item>
+        <item name="backgroundTint">@color/tersier</item>
     </style>
 
 </resources>
