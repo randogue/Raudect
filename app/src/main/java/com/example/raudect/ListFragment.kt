@@ -1,6 +1,8 @@
 package com.example.raudect
 
+import android.content.Context
 import android.os.Bundle
+import android.view.ContextThemeWrapper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +23,8 @@ class ListFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private var contextTheme: Context? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -34,7 +38,11 @@ class ListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list, container, false)
+        //return inflater.inflate(R.layout.fragment_list, container, false)
+
+        val contextThemeWrapper = ContextThemeWrapper(activity, R.style.Base_Theme_Raudect)
+        val themedInflater = inflater.cloneInContext(contextThemeWrapper)
+        return themedInflater.inflate(R.layout.fragment_list,container, false)
     }
 
     companion object {

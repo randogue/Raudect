@@ -16,9 +16,11 @@
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/inputFragment_id"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:name="com.example.raudect.InputFragment"
+            android:layout_height="match_parent"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             tools:layout="@layout/fragment_input"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/navgraph"
             />
     </LinearLayout>
 

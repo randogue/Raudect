@@ -290,7 +290,6 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/button_submit_layout_id"
                 >
                 <Button
                     android:layout_gravity="center"

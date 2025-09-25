@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navgraph"
+    app:startDestination="@id/inputFragment">
+
+    <fragment
+        android:id="@+id/inputFragment"
+        android:name="com.example.raudect.InputFragment"
+        android:label="AddData"
+        tools:layout="@layout/fragment_input"
+        >
+        <action
+            android:id="@+id/action_inputFragment_listFragment"
+            app:destination="@id/listFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.example.raudect.ListFragment"
+        tools:layout="@layout/fragment_list"
+        >
+        <action
+            android:id="@+id/action_listFragment_inputFragment"
+            app:destination="@id/inputFragment"/>
+    </fragment>
+
+</navigation>

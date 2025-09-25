@@ -30,7 +30,9 @@
     </style>
     <style name="inputFragment_title_style"
         parent="@style/TextAppearance.Material3.TitleLarge">
+        <!--alsoFor:fragment_list.xml-->
         <item name="android:textSize">26sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="inputLayout_style">
@@ -46,5 +48,19 @@
         <item name="android:textColor">@color/white</item>
         <item name="backgroundTint">@color/tersier</item>
     </style>
+    <!--end-->
+
+
+
+    <!--TODO: this is styles for fragment_list.xml-->
+    <style name="listFragment_textView_head_style">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="listFragment_textView_indicator_style">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <!--end-->
 
 </resources>

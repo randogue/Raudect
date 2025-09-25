@@ -21,4 +21,9 @@
     <string name="inputLayout_merchantsName_string">Merchants/Staffs</string>
     <string name="button_submit_string">SUBMIT</string>
     <!--end-->
+
+
+    <!--TODO: this is for fragment_input.xml-->
+    <string name="listFragment_textView_title_string">TRANSACTION LIST</string>
+    <!--end-->
 </resources>
