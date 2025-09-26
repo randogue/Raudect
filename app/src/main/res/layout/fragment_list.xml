@@ -211,9 +211,29 @@
                 </LinearLayout>
 
 
+
             </LinearLayout>
+
         </LinearLayout>
 
     </ScrollView>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:constraintBottom_toBottomOf="parent"
+        >
+        <ImageButton
+            android:id="@+id/listFragment_button_add_id"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom|center"
+            android:src="@drawable/outline_add_circle"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:layout_margin="20dp"
+            />
+    </FrameLayout>
 
 </FrameLayout>
