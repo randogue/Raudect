@@ -19,6 +19,7 @@
     <fragment
         android:id="@+id/listFragment"
         android:name="com.example.raudect.ListFragment"
+        android:label="List"
         tools:layout="@layout/fragment_list"
         >
         <action

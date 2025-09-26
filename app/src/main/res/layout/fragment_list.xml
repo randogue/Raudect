@@ -221,7 +221,6 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:constraintBottom_toBottomOf="parent"
         >
         <ImageButton
             android:id="@+id/listFragment_button_add_id"

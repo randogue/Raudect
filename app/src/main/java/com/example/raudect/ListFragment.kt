@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
+import androidx.navigation.fragment.findNavController
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -43,6 +46,16 @@ class ListFragment : Fragment() {
         val contextThemeWrapper = ContextThemeWrapper(activity, R.style.Base_Theme_Raudect)
         val themedInflater = inflater.cloneInContext(contextThemeWrapper)
         return themedInflater.inflate(R.layout.fragment_list,container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        view.findViewById<ImageButton>(R.id.listFragment_button_add_id).
+        setOnClickListener {
+            findNavController().navigate(
+                R.id.action_listFragment_inputFragment
+            )
+        }
     }
 
     companion object {
