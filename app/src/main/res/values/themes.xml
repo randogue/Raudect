@@ -24,10 +24,6 @@
 
 
     <!--TODO: this is styles for fragment_input.xml-->
-    <style name="scrollView_boxed_style">
-        <item name="borderWidth">10dp</item>
-        <item name="backgroundColor">@android:color/transparent</item>
-    </style>
     <style name="inputFragment_title_style"
         parent="@style/TextAppearance.Material3.TitleLarge">
         <!--alsoFor:fragment_list.xml-->
@@ -35,15 +31,15 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="inputLayout_style">
+    <style name="inputFragment_inputLayout_style">
         <item name="android:textSize">15sp</item>
     </style>
 
-    <style name="inputEdit_style">
+    <style name="inputFragment_inputEdit_style">
         <item name="android:textSize">15sp</item>
     </style>
 
-    <style name="button_submit_style"
+    <style name="inputFragment_button_submit_style"
         parent="Widget.MaterialComponents.Button">
         <item name="android:textColor">@color/white</item>
         <item name="backgroundTint">@color/tersier</item>

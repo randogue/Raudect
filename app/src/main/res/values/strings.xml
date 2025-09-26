@@ -5,21 +5,21 @@
 
 
     <!--TODO: this is for fragment_input.xml-->
-    <string name="textView_title_string">ADD DATA</string>
-    <string name="inputLayout_cardNumber_string">Card Number</string>
-    <string name="inputLayout_dateOfBirth_string">Birth(dd/mm/yyyy)</string>
-    <string name="inputLayout_job_string">Job</string>
-    <string name="inputLayout_address_string">Your Address</string>
-    <string name="inputLayout_cityPopulation_string">Population in Your City</string>
+    <string name="inputFragment_textView_title_string">ADD DATA</string>
+    <string name="inputFragment_inputLayout_cardNumber_string">Card Number</string>
+    <string name="inputFragment_inputLayout_dateOfBirth_string">Birth(dd/mm/yyyy)</string>
+    <string name="inputFragment_inputLayout_job_string">Job</string>
+    <string name="inputFragment_inputLayout_address_string">Your Address</string>
+    <string name="inputFragment_inputLayout_cityPopulation_string">Population in Your City</string>
 
-    <string name="textView_TransactionTitle_string">TRANSACTION INFO</string>
-    <string name="inputLayout_transactionTime_string">Date(dd/mm/yyyy)</string>
-    <string name="inputLayout_category_string">Category</string>
-    <string name="inputLayout_transactionAmount_string">Amount($USD)</string>
-    <string name="inputLayout_transactionLatitude_string">Latitude</string>
-    <string name="inputLayout_transactionLongitude_string">Longitude</string>
-    <string name="inputLayout_merchantsName_string">Merchants/Staffs</string>
-    <string name="button_submit_string">SUBMIT</string>
+    <string name="inputFragment_textView_TransactionTitle_string">TRANSACTION INFO</string>
+    <string name="inputFragment_inputLayout_transactionTime_string">Date(dd/mm/yyyy)</string>
+    <string name="inputFragment_inputLayout_category_string">Category</string>
+    <string name="inputFragment_inputLayout_transactionAmount_string">Amount($USD)</string>
+    <string name="inputFragment_inputLayout_transactionLatitude_string">Latitude</string>
+    <string name="inputFragment_inputLayout_transactionLongitude_string">Longitude</string>
+    <string name="inputFragment_inputLayout_merchantsName_string">Merchants/Staffs</string>
+    <string name="inputFragment_button_submit_string">SUBMIT</string>
     <!--end-->
 
 

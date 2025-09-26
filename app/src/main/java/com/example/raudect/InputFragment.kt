@@ -51,7 +51,7 @@ class InputFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<Button>(R.id.button_submit).
+        view.findViewById<Button>(R.id.inputFragment_button_submit).
                 setOnClickListener {
                     findNavController().navigate(
                         R.id.action_inputFragment_listFragment
