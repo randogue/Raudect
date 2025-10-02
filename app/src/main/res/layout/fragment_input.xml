@@ -157,7 +157,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/inputFragment_textView_TransactionTitle_string"
+                android:text="@string/inputFragment_textView_transactionTitle_string"
                 style="@style/inputFragment_title_style"
                 />
 
@@ -192,7 +192,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:hint="@string/inputFragment_inputLayout_category_string"
+                    android:hint="@string/inputFragment_inputLayout_transactionCategory_string"
                     style="@style/inputFragment_inputLayout_style"
                     >
                     <com.google.android.material.textfield.TextInputEditText
@@ -274,7 +274,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:hint="@string/inputFragment_inputLayout_merchantsName_string"
+                android:hint="@string/inputFragment_inputLayout_transactionMerchants_string"
                 style="@style/inputFragment_inputLayout_style"
                 >
                 <com.google.android.material.textfield.TextInputEditText

@@ -1,16 +1,11 @@
 package com.example.raudect
 
-import android.content.Context
 import android.os.Bundle
-import android.text.Layout
-import android.view.ContextThemeWrapper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
-import android.widget.LinearLayout
 import androidx.navigation.fragment.findNavController
 
 // TODO: Rename parameter arguments, choose names that match
@@ -20,15 +15,13 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [ListFragment.newInstance] factory method to
+ * Use the [DetailFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ListFragment : Fragment() {
+class DetailFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
-    private var contextTheme: Context? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,28 +36,14 @@ class ListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_list, container, false)
-
-        val contextThemeWrapper = ContextThemeWrapper(activity, R.style.Base_Theme_Raudect)
-        val themedInflater = inflater.cloneInContext(contextThemeWrapper)
-        return themedInflater.inflate(R.layout.fragment_list,container, false)
+        return inflater.inflate(R.layout.fragment_detail, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<ImageButton>(R.id.listFragment_button_add_id).
-        setOnClickListener {
-            findNavController().navigate(
-                R.id.action_listFragment_inputFragment
-            )
-        }
-        view.findViewById<LinearLayout>(R.id.listFragment_Layout_element1_id).
+        view.findViewById<ImageButton>(R.id.detailFragment_ImageButton_back_id).
                 setOnClickListener {
-                    findNavController().navigate(R.id.action_listFragment_detailFragment)
-                }
-        view.findViewById<LinearLayout>(R.id.listFragment_Layout_element2_id).
-                setOnClickListener {
-                    findNavController().navigate(R.id.action_listFragment_detailFragment)
+                    findNavController().navigate(R.id.action_detailFragment_listFragment)
                 }
     }
 
@@ -75,12 +54,12 @@ class ListFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment ListFragment.
+         * @return A new instance of fragment DetailFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            ListFragment().apply {
+            DetailFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

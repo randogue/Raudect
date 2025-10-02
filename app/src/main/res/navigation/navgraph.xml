@@ -25,6 +25,21 @@
         <action
             android:id="@+id/action_listFragment_inputFragment"
             app:destination="@id/inputFragment"/>
+        <action
+            android:id="@+id/action_listFragment_detailFragment"
+            app:destination="@id/detailFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.raudect.DetailFragment"
+        android:label="Detail"
+        tools:layout="@layout/fragment_detail"
+        >
+        <action
+            android:id="@+id/action_detailFragment_listFragment"
+            app:destination="@id/listFragment"
+            />
     </fragment>
 
 </navigation>
