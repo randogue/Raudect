@@ -3,12 +3,134 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ProfileFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Unfinished ProfileFragment" />
+        android:background="@color/secondary"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <!--Header: contains picture and name-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@color/primary"
+                >
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/listfragment_border"
+                    android:contentDescription="@string/profileFragment_imageView_pictureDesc_string"
+                    android:src="@drawable/person_logo"
+                    />
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="220dp"
+                    android:layout_height="2dp"
+                    android:layout_margin="10dp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    tools:text="Hello, [UserName]!"
+                    />
+            </LinearLayout>
+
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                app:dividerColor="@color/tersier"
+                />
+            <!--Body-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="50dp"
+                android:padding="20dp"
+                android:background="@drawable/custom_border"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/tersier"
+                    android:text="@string/profileFragment_textView_title_string"
+                    />
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="80dp"
+                    android:layout_height="2dp"
+                    app:dividerColor="@color/tersier"
+                    android:layout_marginBottom="10dp"
+                    />
+                <!--editPicture-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="@string/profileFragment_textView_editPicture_string"
+                        />
+                </LinearLayout>
+                <!--editUsername-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="@string/profileFragment_textView_editUsername_string"
+                        />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:hint="@string/profileFragment_textEdit_editUsername_string"
+                        style="@style/inputFragment_inputLayout_style"
+                        >
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/profileFragment_textInput_editUsername_id"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/inputFragment_inputEdit_style"
+                            android:inputType="text"
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+                <Button
+                    android:layout_gravity="center"
+                    android:id="@+id/inputFragment_button_submit"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="@string/editorFragment_button_submit_string"
+                    android:gravity="center"
+                    android:backgroundTint="@color/tersier"
+                    android:textColor="@color/primary"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>
