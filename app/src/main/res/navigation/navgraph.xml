@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/inputFragment"
         android:name="com.example.raudect.InputFragment"
-        android:label="AddData"
+        android:label="Add Data"
         tools:layout="@layout/fragment_input"
         >
         <action
@@ -26,8 +26,20 @@
             android:id="@+id/action_listFragment_inputFragment"
             app:destination="@id/inputFragment"/>
         <action
-            android:id="@+id/action_listFragment_detailFragment"
-            app:destination="@id/detailFragment"/>
+            android:id="@+id/action_listFragment_individualFragment"
+            app:destination="@id/individualFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/individualFragment"
+        android:name="com.example.raudect.IndividualFragment"
+        android:label="Individual Data"
+        tools:layout="@layout/fragment_individual"
+        >
+        <action
+            android:id="@+id/action_detailFragment_listFragment"
+            app:destination="@id/listFragment"
+            />
     </fragment>
 
     <fragment
@@ -41,5 +53,20 @@
             app:destination="@id/listFragment"
             />
     </fragment>
+    <fragment
+        android:id="@+id/importFragment"
+        android:name="com.example.raudect.ImportFragment"
+        android:label="Import CSV"
+        tools:layout="@layout/fragment_import" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.example.raudect.AboutFragment"
+        android:label="About Us"
+        tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.raudect.ProfileFragment"
+        android:label="Your Profile"
+        tools:layout="@layout/fragment_profile" />
 
 </navigation>

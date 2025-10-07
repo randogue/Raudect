@@ -2,7 +2,8 @@
     <string name="app_name">Raudect</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="app_title">Raudect</string>
+    <string name="nav_header_desc">A Fraud Detection Interface between user and machine learning</string>
 
     <!--TODO: this is for fragment_input.xml-->
     <string name="inputFragment_textView_title_string">ADD DATA</string>
@@ -28,7 +29,6 @@
     <!--end-->
 
 
-
     <!--TODO: this is for fragment_detail.xml-->
     <string name="detailFragment_textView_title_string">PERSONAL INFO</string>
     <string name="detailFragment_textView_cardNumber_string">Card Number: </string>
@@ -44,5 +44,22 @@
     <string name="detailFragment_textView_transactionLatitude_string">Latitude: </string>
     <string name="detailFragment_textView_transactionLongitude_string">Longitude: </string>
     <string name="detailFragment_textView_transactionMerchants_string">Merchants/Staffs: </string>
+    <!--end-->
+
+
+    <!--TODO: this is for Tabbed Navigation IndividualAdapter.kt-->
+    <string name="individualAdapter_tab_detailFragment_string">Detail</string>
+    <string name="individualAdapter_tab_editorFragment_string">Editor</string>
+    <!--end-->
+
+    <!--TODO: this is for Drawer Navigation-->
+    <string name="drawer_importFragment_string">Import CSV</string>
+    <string name="drawer_profileFragment_string">Profile</string>
+    <string name="drawer_aboutFragment_string">About Us</string>
+    <!--end-->
+
+    <!--TODO: this is for Bottom Navigation-->
+    <string name="bottom_listFragment_string">List</string>
+    <string name="bottom_inputFragment_string">Add</string>
     <!--end-->
 </resources>

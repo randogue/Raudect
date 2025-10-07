@@ -39,6 +39,7 @@ dependencies {
 
     implementation("androidx.navigation:navigation-fragment:2.9.4")
     implementation("androidx.navigation:navigation-ui:2.9.4")
+    implementation("androidx.viewpager2:viewpager2:1.1.0")
     implementation("com.google.android.material:material:1.13.0")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

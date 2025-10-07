@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <group
+        android:id="@+id/menu_top"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/importFragment"
+            android:icon="@drawable/csv_file_import"
+            android:title="@string/drawer_importFragment_string" />
+    </group>
+    <group
+        android:id="@+id/menu_middle"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/profileFragment"
+            android:icon="@drawable/person_logo"
+            android:title="@string/drawer_profileFragment_string" />
+    </group>
+    <group
+        android:id="@+id/menu_bottom"
+        android:checkableBehavior="single">
+        <!--TODO: change icon-->
+        <item
+            android:id="@+id/aboutFragment"
+            android:icon="@drawable/info_icon"
+            android:title="@string/drawer_aboutFragment_string" />
+    </group>
+</menu>

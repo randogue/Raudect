@@ -1,17 +1,14 @@
 package com.example.raudect
 
-import android.content.Context
 import android.os.Bundle
-import android.text.Layout
-import android.view.ContextThemeWrapper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.LinearLayout
-import androidx.navigation.fragment.findNavController
+import androidx.appcompat.view.ContextThemeWrapper
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,15 +17,13 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [ListFragment.newInstance] factory method to
+ * Use the [IndividualFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ListFragment : Fragment() {
+class IndividualFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
-    private var contextTheme: Context? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,24 +37,23 @@ class ListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_list, container, false)
-
-        val contextThemeWrapper = ContextThemeWrapper(activity, R.style.Base_Theme_Raudect)
+        // Inflate the layout with wrapped theme
+        val contextThemeWrapper = ContextThemeWrapper(activity, R.style.Theme_NavigationDrawer_NoActionBar)
         val themedInflater = inflater.cloneInContext(contextThemeWrapper)
-        return themedInflater.inflate(R.layout.fragment_list,container, false)
+        return themedInflater.inflate(R.layout.fragment_individual, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<LinearLayout>(R.id.listFragment_Layout_element1_id).
-                setOnClickListener {
-                    findNavController().navigate(R.id.action_listFragment_individualFragment)
-                }
-        view.findViewById<LinearLayout>(R.id.listFragment_Layout_element2_id).
-                setOnClickListener {
-                    findNavController().navigate(R.id.action_listFragment_individualFragment)
-                }
+        val viewPager = view.findViewById<ViewPager2>(R.id.view_pager)
+        val tabLayout = view.findViewById<TabLayout>(R.id.tab_layout)
+
+        //use adapter to populate tabs
+        val adapter = IndividualAdapter(childFragmentManager, lifecycle)
+        viewPager.adapter = adapter
+        TabLayoutMediator(tabLayout, viewPager) {tab, position ->
+            tab.text = resources.getString(TABS_FIXED[position].tabTitle)
+        }.attach()
     }
 
     companion object {
@@ -69,12 +63,12 @@ class ListFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment ListFragment.
+         * @return A new instance of fragment IndividualFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            ListFragment().apply {
+            IndividualFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

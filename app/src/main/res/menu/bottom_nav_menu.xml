@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android=
+    "http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/listFragment"
+        android:icon="@drawable/note_logo"
+        android:title="@string/bottom_listFragment_string"
+        />
+
+    <item
+        android:id="@+id/inputFragment"
+        android:icon="@drawable/outline_add_circle"
+        android:title="@string/bottom_inputFragment_string"
+        />
+</menu>
