@@ -68,5 +68,10 @@
         android:name="com.example.raudect.ProfileFragment"
         android:label="Your Profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/editorFragment"
+        android:name="com.example.raudect.EditorFragment"
+        android:label="fragment_editor"
+        tools:layout="@layout/fragment_editor" />
 
 </navigation>
