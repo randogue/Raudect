@@ -47,6 +47,16 @@
     <!--end-->
 
 
+
+    <!--TODO: this is for fragment_editor.xml-->
+    <string name="editorFragment_textView_title_string">EDIT DATA</string>
+    <string name="editorFragment_button_submit_string">APPLY</string>
+    <!--end-->
+
+
+
+
+
     <!--TODO: this is for Tabbed Navigation IndividualAdapter.kt-->
     <string name="individualAdapter_tab_detailFragment_string">Detail</string>
     <string name="individualAdapter_tab_editorFragment_string">Editor</string>
