@@ -51,6 +51,12 @@
     <!--TODO: this is for fragment_editor.xml-->
     <string name="editorFragment_textView_title_string">EDIT DATA</string>
     <string name="editorFragment_button_submit_string">APPLY</string>
+    <!--borrowed a lot from fragment_input.xml-->
+    <!--end-->
+
+
+    <!--TODO: this is for fragment_about.xml-->
+    <string name="aboutFragment_textView_titleWhat_string">WHAT IS RAUDECT?</string>
     <!--end-->
 
 
@@ -60,6 +66,7 @@
     <!--TODO: this is for Tabbed Navigation IndividualAdapter.kt-->
     <string name="individualAdapter_tab_detailFragment_string">Detail</string>
     <string name="individualAdapter_tab_editorFragment_string">Editor</string>
+    <string name="aboutFragment_textView_whatIsRaudect_string">Raudect is an application that predicts whether or not a transaction were made by it\'s legitimate owner or by a fraudster who have stolen the card owner\'s credential.</string>
     <!--end-->
 
     <!--TODO: this is for Drawer Navigation-->

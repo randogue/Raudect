@@ -18,7 +18,7 @@
         android:layout_height="100dp"
         android:contentDescription="@string/nav_header_desc"
         android:paddingTop= "8dp"
-        app:srcCompat="@drawable/person_logo" /> <!--TODO: change to logo-->
+        app:srcCompat="@drawable/main_icon" /> <!--TODO: change to logo-->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

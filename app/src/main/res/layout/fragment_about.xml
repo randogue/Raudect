@@ -3,12 +3,87 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/primary"
     tools:context=".AboutFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="unfinished AboutFragment" />
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <!--header: contains app logo and name-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="30dp"
+                android:background="@color/secondary"
+                android:orientation="vertical"
+                android:gravity="center"
+                >
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:src="@drawable/main_icon"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/app_title"
+                    android:textStyle="bold"
+                    android:textSize="26sp"
+                    android:textColor="@color/tersier"
+                    />
+            </LinearLayout>
+
+            <!--divider-->
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                app:dividerColor="@color/tersier"
+                />
+
+
+
+            <!--Body: Contains about us basically-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp"
+                >
+                <!--Title-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:layout_margin="10dp"
+                    android:text="@string/aboutFragment_textView_titleWhat_string"/>
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="200dp"
+                    android:layout_height="2dp"
+                    android:layout_gravity="center"/>
+
+                <!--About Raudect-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginTop="15dp"
+                    android:padding="20dp"
+                    android:background="@drawable/listfragment_border"
+                    android:text="@string/aboutFragment_textView_whatIsRaudect_string"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
 
 </FrameLayout>
