@@ -12,6 +12,9 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import androidx.navigation.fragment.findNavController
+import com.example.raudect.model.ListModel
+import kotlin.Int
+import kotlin.String
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,6 +27,34 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class ListFragment : Fragment() {
+    private val listData = mutableListOf<ListModel>(
+        ListModel(
+            cardNumber="1234567890123456",
+            dateOfBirth="01/01/2001",
+            job="Job1",
+            address="Address1",
+            cityPopulation="1",
+            transactionTime="01/01/2011",
+            transactionCategory="Gas",
+            transactionAmount="1",
+            transactionLatitude="1.1",
+            transactionLongitude="1.1",
+            transactionMerchants="Merchant1"
+        ),
+        ListModel(
+            cardNumber="0987654321098765",
+            dateOfBirth="02/02/2002",
+            job="Job2",
+            address="Adress2",
+            cityPopulation="2",
+            transactionTime="02/02/2022",
+            transactionCategory="Misc",
+            transactionAmount="2",
+            transactionLatitude="2.2",
+            transactionLongitude="2.2",
+            transactionMerchants="Merchant2"
+        )
+    )
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
