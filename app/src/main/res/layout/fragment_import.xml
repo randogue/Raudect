@@ -3,12 +3,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ImportFragment">
+    android:orientation="vertical"
+    android:background="@color/secondary"
+    tools:context=".ImportFragment"
+    android:padding="10dp">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Unfinished ImportFragment" />
+        android:orientation="vertical"
+        android:background="@drawable/custom_border"
+        android:layout_gravity="center"
+        android:gravity="center"
+        >
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:background="@drawable/border_dottedoutline_solid"
+            android:layout_gravity="center"
+            android:gravity="center"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Import .csv File"
+                android:gravity="center"
+                android:background="@drawable/custom_border"
+                android:padding="10dp"
+                />
+        </LinearLayout>
+    </LinearLayout>
 
 </FrameLayout>

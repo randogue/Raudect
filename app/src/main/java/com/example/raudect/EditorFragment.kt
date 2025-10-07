@@ -1,6 +1,7 @@
 package com.example.raudect
 
 import android.os.Bundle
+import android.view.ContextThemeWrapper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -34,7 +35,9 @@ class EditorFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_editor, container, false)
+        val contextThemeWrapper = ContextThemeWrapper(activity, R.style.Base_Theme_Raudect)
+        val inflaterThemed = inflater.cloneInContext(contextThemeWrapper)
+        return inflaterThemed.inflate(R.layout.fragment_editor, container, false)
     }
 
     companion object {
