@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
@@ -21,6 +22,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class IndividualFragment : Fragment() {
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -54,6 +56,12 @@ class IndividualFragment : Fragment() {
         TabLayoutMediator(tabLayout, viewPager) {tab, position ->
             tab.text = resources.getString(TABS_FIXED[position].tabTitle)
         }.attach()
+
+        //getting position from getting bundle
+        var position = -1 //default value -1
+        arguments?.let { bundle ->
+             position = bundle.getInt("GET_position", -1)
+        }
     }
 
     companion object {

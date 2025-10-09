@@ -42,6 +42,10 @@ class ListFragment : Fragment() {
                     //when item element is clicked
                     //im still thinking about which method to choose for a similar effect to html GET or POST request.
                     //findNavController().navigate(R.id.actionName, bundle)
+                    val bundle = Bundle().apply {
+                        putInt("GET_position", position)
+                    }
+                    findNavController().navigate(R.id.action_listFragment_individualFragment, bundle)
                 }
             }
         )
