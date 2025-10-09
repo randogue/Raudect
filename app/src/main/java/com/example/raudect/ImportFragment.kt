@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.view.ContextThemeWrapper
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,7 +35,9 @@ class ImportFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_import, container, false)
+        val contextThemeWrapper = ContextThemeWrapper(activity, R.style.Base_Theme_Raudect)
+        val inflaterThemed = inflater.cloneInContext(contextThemeWrapper)
+        return inflaterThemed.inflate(R.layout.fragment_import, container, false)
     }
 
     companion object {
