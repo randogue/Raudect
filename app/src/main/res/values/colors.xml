@@ -5,4 +5,5 @@
     <color name="primary">@color/design_default_color_background</color>
     <color name="secondary">#A5B5FD</color>
     <color name="tersier">#334DAE</color>
+    <color name="suspicious">@android:color/holo_red_light</color>
 </resources>

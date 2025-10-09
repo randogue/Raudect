@@ -11,7 +11,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.raudect.model.Indication
 import com.example.raudect.model.ListModel
 import kotlin.Int
 import kotlin.String
@@ -27,39 +31,35 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class ListFragment : Fragment() {
-    private val listData = mutableListOf<ListModel>(
-        ListModel(
-            cardNumber="1234567890123456",
-            dateOfBirth="01/01/2001",
-            job="Job1",
-            address="Address1",
-            cityPopulation="1",
-            transactionTime="01/01/2011",
-            transactionCategory="Gas",
-            transactionAmount="1",
-            transactionLatitude="1.1",
-            transactionLongitude="1.1",
-            transactionMerchants="Merchant1"
-        ),
-        ListModel(
-            cardNumber="0987654321098765",
-            dateOfBirth="02/02/2002",
-            job="Job2",
-            address="Adress2",
-            cityPopulation="2",
-            transactionTime="02/02/2022",
-            transactionCategory="Misc",
-            transactionAmount="2",
-            transactionLatitude="2.2",
-            transactionLongitude="2.2",
-            transactionMerchants="Merchant2"
+    private val listAdapter by lazy {
+        ListAdapter(
+            layoutInflater,
+            requireContext(),
+            object :
+            ListAdapter.OnClickListener {
+                //set on click listener
+                override fun onItemClick(list: ListModel, position : Int) {
+                    //when item element is clicked
+                    //im still thinking about which method to choose for a similar effect to html GET or POST request.
+                    //findNavController().navigate(R.id.actionName, bundle)
+                }
+            }
         )
-    )
+    }
+
+    private lateinit var recyclerView: RecyclerView
+
+
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
     private var contextTheme: Context? = null
+
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,23 +74,59 @@ class ListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_list, container, false)
-
         val contextThemeWrapper = ContextThemeWrapper(activity, R.style.Base_Theme_Raudect)
         val themedInflater = inflater.cloneInContext(contextThemeWrapper)
-        return themedInflater.inflate(R.layout.fragment_list,container, false)
-    }
+        val view = themedInflater.inflate(R.layout.fragment_list,container, false)
+
+        //set adapter
+        recyclerView = view.findViewById(R.id.recycler_view)
+        recyclerView.adapter = listAdapter
+
+        //set layout manager
+        recyclerView.layoutManager = LinearLayoutManager(
+            context,
+            LinearLayoutManager.VERTICAL,
+            false
+        )
+
+        //set data
+        listAdapter.setData(
+            listOf(
+                ListModel(
+                    cardNumber="1234567890123456",
+                    dateOfBirth="01/01/2001",
+                    job="Job1",
+                    address="Address1",
+                    cityPopulation="1",
+                    transactionTime="01/01/2011",
+                    transactionCategory="Gas",
+                    transactionAmount="1",
+                    transactionLatitude="1.1",
+                    transactionLongitude="1.1",
+                    transactionMerchants="Merchant1",
+                    indicator = Indication.SUSPICIOUS
+                ),
+                ListModel(
+                    cardNumber="0987654321098765",
+                    dateOfBirth="02/02/2002",
+                    job="Job2",
+                    address="Adress2",
+                    cityPopulation="2",
+                    transactionTime="02/02/2022",
+                    transactionCategory="Misc",
+                    transactionAmount="2",
+                    transactionLatitude="2.2",
+                    transactionLongitude="2.2",
+                    transactionMerchants="Merchant2",
+                    indicator = Indication.NORMAL
+                )
+            )
+        )
+        return view
+    } //End of onCreateView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<LinearLayout>(R.id.listFragment_Layout_element1_id).
-                setOnClickListener {
-                    findNavController().navigate(R.id.action_listFragment_individualFragment)
-                }
-        view.findViewById<LinearLayout>(R.id.listFragment_Layout_element2_id).
-                setOnClickListener {
-                    findNavController().navigate(R.id.action_listFragment_individualFragment)
-                }
     }
 
     companion object {

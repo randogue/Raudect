@@ -72,6 +72,12 @@
 
 
 
+    <!--TODO: this is for list_element.xml-->
+    <string name="list_suspicious_string">SUSPICIOUS</string>
+    <!--end-->
+
+
+
 
 
     <!--TODO: this is for Tabbed Navigation IndividualAdapter.kt-->

@@ -11,5 +11,6 @@ data class ListModel(
     var transactionAmount:String,
     var transactionLatitude:String,
     var transactionLongitude:String,
-    var transactionMerchants:String
+    var transactionMerchants:String,
+    var indicator: Indication
 )
