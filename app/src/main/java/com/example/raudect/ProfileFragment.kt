@@ -172,8 +172,8 @@ class ProfileFragment : Fragment() {
     private fun showPermissionRationale(positiveAction: () -> Unit) {
         //make pop up alert for asking required permission from user
         AlertDialog.Builder(requireContext())
-            .setTitle("Camera Permission")
-            .setMessage("only for taking profile picture")
+            .setTitle("Camera Permission Required")
+            .setMessage("camera is required for this app to add a profile picture. Profile picture will be uploaded to Firebase Database.")
             .setPositiveButton(android.R.string.ok) {_,_ -> positiveAction()}
             .setNegativeButton(android.R.string.cancel) {dialog,_ -> dialog.dismiss()}
             .create()
