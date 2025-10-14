@@ -27,13 +27,26 @@
                 android:gravity="center"
                 android:background="@color/primary"
                 >
-                <ImageView
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:background="@drawable/listfragment_border"
-                    android:contentDescription="@string/profileFragment_imageView_pictureDesc_string"
-                    android:src="@drawable/person_logo"
-                    />
+                    android:padding="2dp"
+                    >
+                    <ImageView
+                        android:id="@+id/profileFragment_profilePicture"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/listfragment_border"
+                        android:contentDescription="@string/profileFragment_imageView_pictureDesc_string"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/person_logo"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
                 <com.google.android.material.divider.MaterialDivider
                     android:layout_width="220dp"
                     android:layout_height="2dp"
@@ -89,6 +102,21 @@
                         android:layout_margin="10dp"
                         android:text="@string/profileFragment_textView_editPicture_string"
                         />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        >
+                        <Button
+                            android:id="@+id/profileFragment_button_editPicture_id"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/profileFragment_button_editPicture_string"
+                            android:gravity="center"
+                            android:backgroundTint="@color/tersier"
+                            android:textColor="@color/primary"
+                            />
+                    </LinearLayout>
                 </LinearLayout>
                 <!--editUsername-->
                 <LinearLayout

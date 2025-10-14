@@ -37,6 +37,7 @@ android {
 
 dependencies {
 
+    implementation("com.github.bumptech.glide:glide:4.14.2") //Glide api for setting image, used here loading image directly right after taking photo.
     implementation("androidx.navigation:navigation-fragment:2.9.4")
     implementation("androidx.navigation:navigation-ui:2.9.4")
     implementation("androidx.viewpager2:viewpager2:1.1.0")

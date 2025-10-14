@@ -68,6 +68,7 @@
     <string name="profileFragment_textView_editUsername_string">Username: </string>
     <string name="profileFragment_textEdit_editUsername_string">ex:John Doe</string>
     <string name="profileFragment_textView_greeting_string">Hello, %s!</string>
+    <string name="profileFragment_button_editPicture_string">Take Photo</string>
     <!--end-->
 
 
