@@ -1,8 +1,7 @@
 package com.example.raudect
 
-import android.app.Activity
-import android.content.Intent
-import android.graphics.Bitmap
+import android.Manifest
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -15,7 +14,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.registerForActivityResult
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.view.ContextThemeWrapper
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import java.io.File
 import com.bumptech.glide.Glide
@@ -49,6 +51,9 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    //launcher for permission request
+    private lateinit var permissionRequestLauncher: ActivityResultLauncher<String>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,8 +82,26 @@ class ProfileFragment : Fragment() {
         //setting image binder
         profileBinder = view.findViewById<ImageView>(R.id.profileFragment_profilePicture)
 
+        //setting launcher for permission request
+        permissionRequestLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+            granted ->
+            if (granted) { //permission is or already granted, take photo
+                takePhoto()
+            } else { //if not, show rationale dialog
+                showPermissionRationale {
+                    //if user clicked ok in showPermissionRationale, ask system for permission.
+                    permissionRequestLauncher.launch(Manifest.permission.CAMERA) //ask system
+                    //else
+                }
+            }
+        }
+
+
+
         //get img on loading up fragment
         val fileDir = File(requireContext().filesDir, "images/profile_picture.jpg")
+
+        //if exist, get uri and bind image
         if (fileDir.exists()) {
             val uri =  FileProvider.getUriForFile(
                 requireContext(),
@@ -88,10 +111,21 @@ class ProfileFragment : Fragment() {
             profileBinder.setImageURI(uri)
         }
 
+
+
         //set on click btn for setting profile picture
         view.findViewById<Button>(R.id.profileFragment_button_editPicture_id)
             .setOnClickListener {
-                takePhoto()
+                //check for permission
+                when {
+                    checkPermissionCamera() -> takePhoto() //take photo if permission was granted
+                    shouldShowRequestPermissionRationale(Manifest.permission.CAMERA) -> { //shouldShowRequestPermissionRationale(permission) is used to check whether you must show rationale before asking system for permission
+                        showPermissionRationale {
+                            permissionRequestLauncher.launch(Manifest.permission.CAMERA) //ask system for camera permission and input it to manifest
+                        }
+                    }
+                    else -> permissionRequestLauncher.launch(Manifest.permission.CAMERA) //ask for permission
+                }
             }
     }
 
@@ -132,6 +166,24 @@ class ProfileFragment : Fragment() {
         Log.d("ProfileFrag", "makeFileStorage()")
         return File(fileDir,name)
     }
+
+
+    //function to show permission rationale for camera permission
+    private fun showPermissionRationale(positiveAction: () -> Unit) {
+        //make pop up alert for asking required permission from user
+        AlertDialog.Builder(requireContext())
+            .setTitle("Camera Permission")
+            .setMessage("only for taking profile picture")
+            .setPositiveButton(android.R.string.ok) {_,_ -> positiveAction()}
+            .setNegativeButton(android.R.string.cancel) {dialog,_ -> dialog.dismiss()}
+            .create()
+            .show()
+    }
+
+    //function for checking camera permission
+    private fun checkPermissionCamera() =
+        ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+
 
 
     companion object {
