@@ -36,10 +36,6 @@
         android:label="Individual Data"
         tools:layout="@layout/fragment_individual"
         >
-        <action
-            android:id="@+id/action_detailFragment_listFragment"
-            app:destination="@id/listFragment"
-            />
     </fragment>
 
     <fragment
@@ -48,10 +44,6 @@
         android:label="Detail"
         tools:layout="@layout/fragment_detail"
         >
-        <action
-            android:id="@+id/action_detailFragment_listFragment"
-            app:destination="@id/listFragment"
-            />
     </fragment>
     <fragment
         android:id="@+id/importFragment"

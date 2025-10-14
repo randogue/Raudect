@@ -41,10 +41,6 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<ImageButton>(R.id.detailFragment_ImageButton_back_id).
-                setOnClickListener {
-                    findNavController().navigate(R.id.action_detailFragment_listFragment)
-                }
     }
 
     companion object {
