@@ -3,6 +3,7 @@ package com.example.raudect
 import android.content.Context
 import android.os.Bundle
 import android.text.Layout
+import android.util.Log
 import android.view.ContextThemeWrapper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,6 +18,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.raudect.model.Indication
 import com.example.raudect.model.ListModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlin.Int
 import kotlin.String
 
@@ -62,7 +66,10 @@ class ListFragment : Fragment() {
     private var contextTheme: Context? = null
 
 
-
+    //database, auth, list init
+    private lateinit var fraudTestRef: DatabaseReference
+    private lateinit var auth: FirebaseAuth
+    private val list = mutableListOf<ListModel>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,45 +100,60 @@ class ListFragment : Fragment() {
             false
         )
 
-        //set data
-        listAdapter.setData(
-            listOf(
-                ListModel(
-                    cardNumber="1234567890123456",
-                    dateOfBirth="01/01/2001",
-                    job="Job1",
-                    address="Address1",
-                    cityPopulation="1",
-                    transactionTime="01/01/2011",
-                    transactionCategory="Gas",
-                    transactionAmount="1",
-                    transactionLatitude="1.1",
-                    transactionLongitude="1.1",
-                    transactionMerchants="Merchant1",
-                    indicator = Indication.SUSPICIOUS
-                ),
-                ListModel(
-                    cardNumber="0987654321098765",
-                    dateOfBirth="02/02/2002",
-                    job="Job2",
-                    address="Adress2",
-                    cityPopulation="2",
-                    transactionTime="02/02/2022",
-                    transactionCategory="Misc",
-                    transactionAmount="2",
-                    transactionLatitude="2.2",
-                    transactionLongitude="2.2",
-                    transactionMerchants="Merchant2",
-                    indicator = Indication.NORMAL
-                )
-            )
-        )
         return view
     } //End of onCreateView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //database, auth, user, query instantiation
+        fraudTestRef = FirebaseDatabase.getInstance().getReference("fraud_test_info")
+        auth = FirebaseAuth.getInstance()
+        val user = auth.currentUser
+        val query = fraudTestRef.orderByChild("uid").equalTo(user?.uid)
+
+        //getting list of data from database
+        query.get().addOnSuccessListener { snapshot ->
+            if(snapshot.exists()){
+                for(child in snapshot.children){
+                    //child is equivalent to a row
+                    lateinit var indication: Indication
+                    if(child.child("isfraud").getValue().toString().toBoolean()){
+                        indication = Indication.SUSPICIOUS
+                    }
+                    else{
+                        indication = Indication.NORMAL
+                    }
+
+                    list.add(
+                        ListModel(
+                            cardNumber=child.child("cardnum").getValue().toString(),
+                            dateOfBirth=child.child("dateofbirth").getValue().toString(),
+                            job=child.child("job").getValue().toString(),
+                            address=child.child("address").getValue().toString(),
+                            cityPopulation=child.child("citypop").getValue().toString(),
+                            transactionTime=child.child("date").getValue().toString(),
+                            transactionCategory=child.child("category").getValue().toString(),
+                            transactionAmount=child.child("amount").getValue().toString(),
+                            transactionLatitude=child.child("lat").getValue().toString(),
+                            transactionLongitude=child.child("lon").getValue().toString(),
+                            transactionMerchants=child.child("merchant").getValue().toString(),
+                            indicator = indication
+                        )
+                    )
+                }
+            }
+            else{
+                //when there is no data
+            }
+            //set data
+            listAdapter.setData(list)
+        }.
+        addOnFailureListener {e->
+            Log.e("Firebase", "Failed: ${e.message}")
+        }
     }
+
 
     companion object {
         /**
