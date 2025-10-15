@@ -47,7 +47,6 @@
     <!--end-->
 
 
-
     <!--TODO: this is for fragment_editor.xml-->
     <string name="editorFragment_textView_title_string">EDIT DATA</string>
     <string name="editorFragment_button_submit_string">APPLY</string>
@@ -58,7 +57,6 @@
     <!--TODO: this is for fragment_about.xml-->
     <string name="aboutFragment_textView_titleWhat_string">WHAT IS RAUDECT?</string>
     <!--end-->
-
 
 
     <!--TODO: this is for fragment_profile.xml-->
@@ -72,13 +70,9 @@
     <!--end-->
 
 
-
     <!--TODO: this is for list_element.xml-->
     <string name="list_suspicious_string">SUSPICIOUS</string>
     <!--end-->
-
-
-
 
 
     <!--TODO: this is for Tabbed Navigation IndividualAdapter.kt-->
@@ -96,5 +90,10 @@
     <!--TODO: this is for Bottom Navigation-->
     <string name="bottom_listFragment_string">List</string>
     <string name="bottom_inputFragment_string">Add</string>
+    <!--end-->
+
+    <!--TODO: this is for Bottom Navigation-->
+    <string name="welcome_signIn_string">Welcome</string>
+    <string name="button_signIn_string">Sign In Through Google</string>
     <!--end-->
 </resources>
