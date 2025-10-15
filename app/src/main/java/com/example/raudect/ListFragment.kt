@@ -115,6 +115,7 @@ class ListFragment : Fragment() {
         //getting list of data from database
         query.get().addOnSuccessListener { snapshot ->
             if(snapshot.exists()){
+                list.clear()
                 for(child in snapshot.children){
                     //child is equivalent to a row
                     lateinit var indication: Indication
