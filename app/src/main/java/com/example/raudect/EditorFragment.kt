@@ -9,8 +9,7 @@ import android.view.ViewGroup
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val ARG_PARAM1 = "tid"
 
 /**
  * A simple [Fragment] subclass.
@@ -19,14 +18,12 @@ private const val ARG_PARAM2 = "param2"
  */
 class EditorFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var testId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            testId = it.getString(ARG_PARAM1)
         }
     }
 
@@ -51,12 +48,12 @@ class EditorFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            EditorFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+        fun newInstance(testId: String?): EditorFragment{
+            val fragment = EditorFragment()
+            fragment.arguments = Bundle().apply {
+                putString("tid", testId)
             }
+            return fragment
+        }
     }
 }

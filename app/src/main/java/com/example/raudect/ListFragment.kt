@@ -2,6 +2,7 @@ package com.example.raudect
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Parcelable
 import android.text.Layout
 import android.util.Log
 import android.view.ContextThemeWrapper
@@ -35,6 +36,12 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class ListFragment : Fragment() {
+    //making custom model
+    data class Stuff(
+        val list: ListModel,
+        val position: Int
+    )
+
     private val listAdapter by lazy {
         ListAdapter(
             layoutInflater,
@@ -46,8 +53,11 @@ class ListFragment : Fragment() {
                     //when item element is clicked
                     //im still thinking about which method to choose for a similar effect to html GET or POST request.
                     //findNavController().navigate(R.id.actionName, bundle)
+
+                    val testId = list.testId
+
                     val bundle = Bundle().apply {
-                        putInt("GET_position", position)
+                        putString("GET_tid", testId)
                     }
                     findNavController().navigate(R.id.action_listFragment_individualFragment, bundle)
                 }
@@ -128,6 +138,7 @@ class ListFragment : Fragment() {
 
                     list.add(
                         ListModel(
+                            testId =child.child("tid").getValue().toString(),
                             cardNumber=child.child("cardnum").getValue().toString(),
                             dateOfBirth=child.child("dateofbirth").getValue().toString(),
                             job=child.child("job").getValue().toString(),

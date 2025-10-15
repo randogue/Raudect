@@ -20,7 +20,8 @@ val TABS_FIXED = listOf(
 
 class IndividualAdapter(
     fragmentManager: FragmentManager,
-    lifecycle: Lifecycle
+    lifecycle: Lifecycle,
+    private val testId:String?
 ): FragmentStateAdapter(fragmentManager, lifecycle)
 {
 
@@ -31,9 +32,11 @@ class IndividualAdapter(
 
     //create fragment according to it's position
     override fun createFragment(position: Int): Fragment {
-        //using parent data
-        val theFragment = TABS_FIXED[position].tabFragment
-        return theFragment
+        return when (position) {
+            0 -> DetailFragment.newInstance(testId)
+            1 -> EditorFragment.newInstance(testId)
+            else -> throw IllegalArgumentException("Invalid tab index")
+        }
     }
 
 }
