@@ -5,20 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 
-class IndividualFragment : Fragment() {
+class IndividualFragment : Fragment(R.layout.fragment_individual) {
 
     private var testId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -36,6 +34,9 @@ class IndividualFragment : Fragment() {
         //hold view related to pager
         val viewPager = view.findViewById<ViewPager2>(R.id.view_pager)
         val tabLayout = view.findViewById<TabLayout>(R.id.tab_layout)
+
+        //receive bundle from list fragment
+        testId = arguments?.getString("tid")
 
         //use adapter to populate tabs
         val adapter = IndividualAdapter(childFragmentManager, lifecycle, testId)

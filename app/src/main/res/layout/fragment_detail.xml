@@ -75,7 +75,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:text="123412341234"
                 />
         </LinearLayout>
 
@@ -101,7 +100,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:text="dd/mm/yyyy"
                 />
         </LinearLayout>
 
@@ -127,7 +125,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:text="work"
                 />
         </LinearLayout>
 
@@ -153,7 +150,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:text="address"
                 />
         </LinearLayout>
 
@@ -179,7 +175,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:text="cityPopulation"
                 />
         </LinearLayout>
 
@@ -235,7 +230,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:text="dd/mm/yyyy"
                 />
         </LinearLayout>
 
@@ -261,7 +255,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:text="misc"
                 />
         </LinearLayout>
 
@@ -287,7 +280,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:text="1$"
                 />
         </LinearLayout>
 
@@ -313,7 +305,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:text="x"
                 />
         </LinearLayout>
 
@@ -339,7 +330,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:text="y"
                 />
         </LinearLayout>
 
@@ -365,7 +355,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:text="Andy, Bob, Charlie"
                 />
         </LinearLayout>
 

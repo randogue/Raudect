@@ -63,11 +63,9 @@
                     style="@style/inputFragment_inputLayout_style"
                     >
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/inputFragment_inputEdit_cardNumber_layout"
+                        android:id="@+id/editorFragment_cardNumber_id"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:inputType="numberDecimal"
-                        android:maxLength="19"
                         android:hint="@string/inputFragment_inputLayout_cardNumber_string"
                         style="@style/inputFragment_inputEdit_style"
                         />
@@ -84,11 +82,9 @@
                     android:gravity="center"
                     >
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/inputFragment_inputEdit_dateOfBirth_layout"
+                        android:id="@+id/editorFragment_dateOfBirth_id"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:inputType="date"
-                        android:maxLength="10"
                         style="@style/inputFragment_inputEdit_style"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -103,11 +99,9 @@
                 style="@style/inputFragment_inputLayout_style"
                 >
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inputFragment_inputEdit_job_layout"
+                    android:id="@+id/editorFragment_job_id"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:inputType="text"
-                    android:maxLength="255"
                     style="@style/inputFragment_inputEdit_style"
                     />
             </com.google.android.material.textfield.TextInputLayout>
@@ -121,11 +115,9 @@
                 style="@style/inputFragment_inputLayout_style"
                 >
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inputFragment_inputEdit_address_layout"
+                    android:id="@+id/editorFragment_address_id"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:inputType="text"
-                    android:maxLength="255"
                     style="@style/inputFragment_inputEdit_style"
                     />
             </com.google.android.material.textfield.TextInputLayout>
@@ -139,11 +131,9 @@
                 style="@style/inputFragment_inputLayout_style"
                 >
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inputFragment_inputEdit_cityPopulation_layout"
+                    android:id="@+id/editorFragment_cityPopulation_id"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:inputType="numberDecimal"
-                    android:maxLength="255"
                     style="@style/inputFragment_inputEdit_style"
                     />
             </com.google.android.material.textfield.TextInputLayout>
@@ -182,11 +172,9 @@
                     style="@style/inputFragment_inputLayout_style"
                     >
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/inputFragment_inputEdit_transactionTime_layout"
+                        android:id="@+id/editorFragment_transactionTime_id"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:inputType="numberDecimal"
-                        android:maxLength="255"
                         style="@style/inputFragment_inputEdit_style"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -201,11 +189,9 @@
                     style="@style/inputFragment_inputLayout_style"
                     >
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/inputFragment_inputEdit_category_layout"
+                        android:id="@+id/editorFragment_category_id"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:inputType="numberDecimal"
-                        android:maxLength="255"
                         style="@style/inputFragment_inputEdit_style"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -220,7 +206,7 @@
                 style="@style/inputFragment_inputLayout_style"
                 >
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inputFragment_inputEdit_transactionAmount_layout"
+                    android:id="@+id/editorFragment_transactionAmount_id"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="numberDecimal"
@@ -245,7 +231,7 @@
                     style="@style/inputFragment_inputLayout_style"
                     >
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/inputFragment_inputEdit_transactionLatitude_layout"
+                        android:id="@+id/editorFragment_transactionLatitude_id"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:inputType="numberDecimal"
@@ -264,7 +250,7 @@
                     style="@style/inputFragment_inputLayout_style"
                     >
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/inputFragment_inputEdit_transactionLongitude_layout"
+                        android:id="@+id/editorFragment_transactionLongitude_id"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:inputType="numberDecimal"
@@ -283,11 +269,9 @@
                 style="@style/inputFragment_inputLayout_style"
                 >
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inputFragment_inputEdit_merchantsName_layout"
+                    android:id="@+id/editorFragment_transactionMerchant_id"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:inputType="numberDecimal"
-                    android:maxLength="255"
                     style="@style/inputFragment_inputEdit_style"
                     />
             </com.google.android.material.textfield.TextInputLayout>
@@ -298,7 +282,7 @@
                 >
                 <Button
                     android:layout_gravity="center"
-                    android:id="@+id/inputFragment_button_submit"
+                    android:id="@+id/editorFragment_button_submit"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:text="@string/editorFragment_button_submit_string"
