@@ -7,6 +7,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -21,12 +23,18 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
+
+    private lateinit var auth: FirebaseAuth
+    private lateinit var usersRef: DatabaseReference
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +48,29 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, naviBars.bottom)
             insets
         }
+
+        //firebase database ref
+        auth = FirebaseAuth.getInstance()
+        usersRef = FirebaseDatabase.getInstance().getReference("users")
+        val user = auth.currentUser
+
+        //register if new UID
+        if(user != null){
+            usersRef.child(user.uid).get().addOnSuccessListener {
+                //check if exist
+                if(!it.exists()){
+                    val userRef = usersRef.child(user.uid)
+                    userRef.child("username").setValue(user.displayName)
+                    userRef.child("uid").setValue((user.uid))
+                }
+            }.addOnFailureListener { e->
+                Log.w("MAIN_ACTIVITY", "Failed to register user: ${e.message}")
+                Toast.makeText(this, "Failed to register user: ${e.message}", Toast.LENGTH_LONG).show()
+            }
+        }
+
+
+        //navigation, fragment, etc
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
                     as NavHostFragment
