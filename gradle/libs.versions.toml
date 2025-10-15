@@ -14,9 +14,8 @@ ucrop = "2.2.8"
 googlePlayServicesAuth = "21.4.0"
 googleGmsGoogleServices = "4.4.4"
 firebaseAuth = "24.0.1"
-credentials = "1.5.0"
-credentialsPlayServicesAuth = "1.5.0"
-googleid = "1.1.1"
+
+firebaseDatabase = "22.0.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -30,9 +29,8 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 
 google-play-services-auth = {module = "com.google.android.gms:play-services-auth", version.ref = "googlePlayServicesAuth"}
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
-androidx-credentials = { group = "androidx.credentials", name = "credentials", version.ref = "credentials" }
-androidx-credentials-play-services-auth = { group = "androidx.credentials", name = "credentials-play-services-auth", version.ref = "credentialsPlayServicesAuth" }
-googleid = { group = "com.google.android.libraries.identity.googleid", name = "googleid", version.ref = "googleid" }
+
+firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
