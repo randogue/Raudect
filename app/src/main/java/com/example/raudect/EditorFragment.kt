@@ -113,10 +113,10 @@ class EditorFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance(testId: String?): EditorFragment {
+        fun newInstance(transactionId: String?): EditorFragment {
             val fragment = EditorFragment()
             val bundle = Bundle()
-            bundle.putString("tid", testId)
+            bundle.putString("tid", transactionId)
             fragment.arguments = bundle
             return fragment
         }
