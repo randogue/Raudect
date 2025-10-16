@@ -17,10 +17,11 @@ import com.google.firebase.database.FirebaseDatabase
 class EditorFragment : Fragment() {
 
     //passed arg init
-    private var testId: String? = null
+    private var transactionId: String? = null
 
     //database + auth init
-    private lateinit var fraudTestRef: DatabaseReference
+    private lateinit var cardOwnerRef: DatabaseReference
+    private lateinit var transactionRef: DatabaseReference
     private lateinit var auth: FirebaseAuth
 
     //input laziest cache xd
@@ -45,84 +46,70 @@ class EditorFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //receiving bundle from individual adapter
-        testId = arguments?.getString("tid")
+        transactionId = arguments?.getString("tid")
 
         //view holding
-//        val cardNumber = view.findViewById<TextInputEditText>(R.id.editorFragment_cardNumber_id)
-//        val dateOfBirth = view.findViewById<TextInputEditText>(R.id.editorFragment_dateOfBirth_id)
-//        val job = view.findViewById<TextInputEditText>(R.id.editorFragment_job_id)
-//        val address = view.findViewById<TextInputEditText>(R.id.editorFragment_address_id)
-//        val cityPopulation = view.findViewById<TextInputEditText>(R.id.editorFragment_cityPopulation_id)
-//
-//        val date = view.findViewById<TextInputEditText>(R.id.editorFragment_transactionTime_id)
-//        val category = view.findViewById<TextInputEditText>(R.id.editorFragment_category_id)
-//        val amount = view.findViewById<TextInputEditText>(R.id.editorFragment_transactionAmount_id)
-//        val lat = view.findViewById<TextInputEditText>(R.id.editorFragment_transactionLatitude_id)
-//        val lon = view.findViewById<TextInputEditText>(R.id.editorFragment_transactionLongitude_id)
-//        val merchant = view.findViewById<TextInputEditText>(R.id.editorFragment_transactionMerchant_id)
-//
-//        val submit = view.findViewById<Button>(R.id.editorFragment_button_submit)
+        val cardNumber = view.findViewById<TextInputEditText>(R.id.editorFragment_cardNumber_id)
+        val date = view.findViewById<TextInputEditText>(R.id.editorFragment_transactionTime_id)
+        val category = view.findViewById<TextInputEditText>(R.id.editorFragment_category_id)
+        val amount = view.findViewById<TextInputEditText>(R.id.editorFragment_transactionAmount_id)
+        val lat = view.findViewById<TextInputEditText>(R.id.editorFragment_transactionLatitude_id)
+        val lon = view.findViewById<TextInputEditText>(R.id.editorFragment_transactionLongitude_id)
+        val merchant = view.findViewById<TextInputEditText>(R.id.editorFragment_transactionMerchant_id)
+
+        val submit = view.findViewById<Button>(R.id.editorFragment_button_submit)
 
 
         //auth + database instantiation
-        fraudTestRef = FirebaseDatabase.getInstance().getReference("fraud_test_info")
+        cardOwnerRef = FirebaseDatabase.getInstance().getReference("card_owner_info")
+        transactionRef = FirebaseDatabase.getInstance().getReference("transaction_info")
         auth = FirebaseAuth.getInstance()
         val user = auth.currentUser
 
-        //getting fraud_test_info row
-//        fraudTestRef.child(testId.toString()).get().addOnSuccessListener {snapshot ->
-//            if(snapshot.exists()){
-//
-//                //filling text view
-//                cardNumber.setText(snapshot.child("cardnum").getValue().toString())
-//                dateOfBirth.setText(snapshot.child("dateofbirth").getValue().toString())
-//                job.setText(snapshot.child("job").getValue().toString())
-//                address.setText(snapshot.child("address").getValue().toString())
-//                cityPopulation.setText(snapshot.child("citypop").getValue().toString())
-//
-//                date.setText(snapshot.child("date").getValue().toString())
-//                category.setText(snapshot.child("category").getValue().toString())
-//                amount.setText(snapshot.child("amount").getValue().toString())
-//                lat.setText(snapshot.child("lat").getValue().toString())
-//                lon.setText(snapshot.child("lon").getValue().toString())
-//                merchant.setText(snapshot.child("merchant").getValue().toString())
-//
-//                unmutable_tid = snapshot.child("tid").getValue().toString()
-//                unmutable_fraud = snapshot.child("isfraud").getValue().toString()
-//            }
-//            else{
-//                Toast.makeText(context, "Error, accessing nothing", Toast.LENGTH_SHORT).show()
-//            }
-//
-//        }.addOnFailureListener { e ->
-//            Toast.makeText(context, "Firebase Exception: ${e.message}", Toast.LENGTH_SHORT).show()
-//        }
-//
-//        //setting onclick for submitting changes
-//        submit.setOnClickListener {
-//            val rowUpdateData = mapOf<String, Any>(
-//                //personal
-//                "cardnum" to cardNumber.text.toString(),
-//                "dateofbirth" to dateOfBirth.text.toString(),
-//                "job" to job.text.toString(),
-//                "address" to address.text.toString(),
-//                "citypop" to cityPopulation.text.toString().toInt(),
-//                //transaction
-//                "date" to date.text.toString(),
-//                "category" to category.text.toString(),
-//                "amount" to amount.text.toString().toFloat(),
-//                "lat" to lat.text.toString().toFloat(),
-//                "lon" to lon.text.toString().toFloat(),
-//                "merchant" to merchant.text.toString(),
-//            )
-//            fraudTestRef.child(unmutable_tid).updateChildren(rowUpdateData)
-//                .addOnSuccessListener {
-//                    Toast.makeText(context, "Successfully updated data!", Toast.LENGTH_SHORT).show()
-//                }
-//                .addOnFailureListener { e->
-//                    Toast.makeText(context, "Failed to updated data, ${e.message}", Toast.LENGTH_SHORT).show()
-//                }
-//        }
+        //getting transaction and personal data
+        transactionRef.child(transactionId.toString()).get()
+            .addOnSuccessListener { transaction->
+                if(transaction.exists()){
+                    //filling transaction detail
+                    cardNumber.setText(transaction.child("cardnum").getValue().toString())
+                    date.setText(transaction.child("date").getValue().toString())
+                    category.setText(transaction.child("category").getValue().toString())
+                    amount.setText(transaction.child("amount").getValue().toString())
+                    lat.setText(transaction.child("lat").getValue().toString())
+                    lon.setText(transaction.child("lon").getValue().toString())
+                    merchant.setText(transaction.child("merchant").getValue().toString())
+
+                    unmutable_tid = transaction.child("tid").getValue().toString()
+                    unmutable_fraud = transaction.child("isfraud").getValue().toString()
+                }
+                else{
+                    Toast.makeText(context, "Transaction details not found", Toast.LENGTH_LONG).show()
+                }
+            }
+            .addOnFailureListener { e->
+                Toast.makeText(context, "Error setting item data: ${e.message}", Toast.LENGTH_LONG).show()
+            }
+
+
+        //setting onclick for submitting changes
+        submit.setOnClickListener {
+            val rowUpdateData = mapOf<String, Any>(
+                "cardnum" to cardNumber.text.toString(),
+                "date" to date.text.toString(),
+                "category" to category.text.toString(),
+                "amount" to amount.text.toString().toFloat(),
+                "lat" to lat.text.toString().toFloat(),
+                "lon" to lon.text.toString().toFloat(),
+                "merchant" to merchant.text.toString(),
+            )
+            transactionRef.child(unmutable_tid).updateChildren(rowUpdateData)
+                .addOnSuccessListener {
+                    Toast.makeText(context, "Successfully updated data!", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener { e->
+                    Toast.makeText(context, "Failed to updated data, ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+        }
     }
 
     companion object {

@@ -14,10 +14,11 @@ import com.google.firebase.database.FirebaseDatabase
 
 class DetailFragment : Fragment() {
     //passed arg init
-    private var testId: String? = null
+    private var transactionId: String? = null
 
     //database + auth init
-    private lateinit var fraudTestRef: DatabaseReference
+    private lateinit var cardOwnerRef: DatabaseReference
+    private lateinit var transactionRef: DatabaseReference
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +37,7 @@ class DetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //receiving bundle from individual adapter
-        testId = arguments?.getString("tid")
+        transactionId = arguments?.getString("tid")
 
         //view holding
         val cardNumber = view.findViewById<TextView>(R.id.detailFragment_cardNumber_id)
@@ -52,46 +53,57 @@ class DetailFragment : Fragment() {
         val lon = view.findViewById<TextView>(R.id.detailFragment_transactionLongitude_id)
         val merchant = view.findViewById<TextView>(R.id.detailFragment_transactionMerchant_id)
 
-        fraudTestRef = FirebaseDatabase.getInstance().getReference("fraud_test_info")
+        //auth + db instantiation
+        cardOwnerRef = FirebaseDatabase.getInstance().getReference("card_owner_info")
+        transactionRef = FirebaseDatabase.getInstance().getReference("transaction_info")
         auth = FirebaseAuth.getInstance()
         val user = auth.currentUser
 
-        //getting fraud_test_info row
-        fraudTestRef.child(testId.toString()).get().addOnSuccessListener {snapshot ->
-            if(snapshot.exists()){
+        //getting transaction and personal data
+        transactionRef.child(transactionId.toString()).get()
+            .addOnSuccessListener { transaction->
+                if(transaction.exists()){
+                    //filling transaction detail
+                    date.text = transaction.child("date").getValue().toString()
+                    category.text = transaction.child("category").getValue().toString()
+                    amount.text = transaction.child("amount").getValue().toString()
+                    lat.text = transaction.child("lat").getValue().toString()
+                    lon.text = transaction.child("lon").getValue().toString()
+                    merchant.text = transaction.child("merchant").getValue().toString()
 
-                //filling text view
-                cardNumber.text = snapshot.child("cardnum").getValue().toString()
-                dateOfBirth.text = snapshot.child("dateofbirth").getValue().toString()
-                job.text = snapshot.child("job").getValue().toString()
-                address.text = snapshot.child("address").getValue().toString()
-                cityPopulation.text = snapshot.child("citypop").getValue().toString()
-
-                date.text = snapshot.child("date").getValue().toString()
-                category.text = snapshot.child("category").getValue().toString()
-                amount.text = snapshot.child("amount").getValue().toString()
-                lat.text = snapshot.child("lat").getValue().toString()
-                lon.text = snapshot.child("lon").getValue().toString()
-                merchant.text = snapshot.child("merchant").getValue().toString()
+                    //getting personal data
+                    cardOwnerRef.child(transaction.child("cardnum").getValue().toString())
+                        .get().addOnSuccessListener { card->
+                            if(card.exists()){
+                                //filling personal detail
+                                cardNumber.text = card.child("cardnum").getValue().toString()
+                                dateOfBirth.text = card.child("dateofbirth").getValue().toString()
+                                job.text = card.child("job").getValue().toString()
+                                address.text = card.child("address").getValue().toString()
+                                cityPopulation.text = card.child("citypop").getValue().toString()
+                            }
+                            else{
+                                Toast.makeText(context, "Card Owner details not found", Toast.LENGTH_LONG).show()
+                            }
+                        }
+                        .addOnFailureListener { e->
+                            Toast.makeText(context, "Error setting item data: ${e.message}", Toast.LENGTH_LONG).show()
+                        }
+                }
+                else{
+                    Toast.makeText(context, "Transaction details not found", Toast.LENGTH_LONG).show()
+                }
             }
-            else{
-                Toast.makeText(context, "Error, accessing nothing", Toast.LENGTH_SHORT).show()
+            .addOnFailureListener { e->
+                Toast.makeText(context, "Error setting item data: ${e.message}", Toast.LENGTH_LONG).show()
             }
-
-        }.addOnFailureListener { e ->
-            Toast.makeText(context, "Firebase Exception: ${e.message}", Toast.LENGTH_SHORT).show()
-        }
-
-
-
-
     }
 
     companion object {
-        fun newInstance(testId: String?): DetailFragment {
+        fun newInstance(transactionId: String?): DetailFragment {
             val fragment = DetailFragment()
             val bundle = Bundle()
-            bundle.putString("tid", testId)
+            bundle.putString("tid", transactionId)
             fragment.arguments = bundle
             return fragment
         }

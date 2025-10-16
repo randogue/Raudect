@@ -20,16 +20,6 @@ import com.google.firebase.database.FirebaseDatabase
 import kotlin.Int
 import kotlin.String
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ListFragment : Fragment() {
     //connecting item to pager
     private val listAdapter by lazy {
@@ -41,10 +31,10 @@ class ListFragment : Fragment() {
                 //set on click listener
                 override fun onItemClick(list: ListModel, position : Int) {
                     //when item element is clicked
-                    val testId = list.testId
+                    val transactionId = list.transactionId
 
                     val bundle = Bundle().apply {
-                        putString("tid", testId)
+                        putString("tid", transactionId)
                     }
                     findNavController().navigate(R.id.action_listFragment_individualFragment, bundle)
                 }
@@ -124,7 +114,7 @@ class ListFragment : Fragment() {
                             //adding all data
                             list.add(
                                 ListModel(
-                                    testId =transaction.child("tid").getValue().toString(),
+                                    transactionId =transaction.child("tid").getValue().toString(),
 
                                     cardNumber=cardOwner.child("cardnum").getValue().toString(),
                                     dateOfBirth=cardOwner.child("dateofbirth").getValue().toString(),
@@ -141,16 +131,13 @@ class ListFragment : Fragment() {
                                     indicator = indication
                                 )
                             )
+                            //set data
+                            listAdapter.setData(list)
                         }. addOnFailureListener { e->
                             Toast.makeText(context, "Error card owner: ${e.message}", Toast.LENGTH_LONG).show()
                         }
-
-
-
                 }
             }
-            //set data
-            listAdapter.setData(list)
         }.
         addOnFailureListener {e->
             Toast.makeText(context, "Error setting item data: ${e.message}", Toast.LENGTH_LONG).show()

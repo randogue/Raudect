@@ -23,6 +23,193 @@
         android:orientation="vertical"
         android:background="@drawable/custom_border"
         >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="@id/mainLayout"
+            android:layout_margin="10dp"
+            android:paddingBottom="20dp"
+            >
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/editorFragment_textView_title_string"
+                style="@style/inputFragment_title_style"
+                />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_margin="15dp"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:baselineAligned="false"
+                >
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inputFragment_inputLayout_cardNumber_layout"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    style="@style/inputFragment_inputLayout_style"
+                    >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editorFragment_cardNumber_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/inputFragment_inputLayout_cardNumber_string"
+                        style="@style/inputFragment_inputEdit_style"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:baselineAligned="false"
+                >
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inputFragment_inputLayout_transactionTime_layout"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:hint="@string/inputTransactionFragment_inputLayout_transactionTime_string"
+                    style="@style/inputFragment_inputLayout_style"
+                    >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editorFragment_transactionTime_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        style="@style/inputFragment_inputEdit_style"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inputFragment_inputLayout_category_layout"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:hint="@string/inputTransactionFragment_inputLayout_transactionCategory_string"
+                    style="@style/inputFragment_inputLayout_style"
+                    >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editorFragment_category_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        style="@style/inputFragment_inputEdit_style"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputFragment_inputLayout_transactionAmount_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:hint="@string/inputTransactionFragment_inputLayout_transactionAmount_string"
+                style="@style/inputFragment_inputLayout_style"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editorFragment_transactionAmount_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="numberDecimal"
+                    android:maxLength="255"
+                    style="@style/inputFragment_inputEdit_style"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:baselineAligned="false"
+                >
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inputFragment_inputLayout_transactionLatitude_layout"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:hint="@string/inputTransactionFragment_inputLayout_transactionLatitude_string"
+                    style="@style/inputFragment_inputLayout_style"
+                    >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editorFragment_transactionLatitude_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="numberDecimal"
+                        android:maxLength="255"
+                        style="@style/inputFragment_inputEdit_style"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inputFragment_inputLayout_transactionLongitude_layout"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:hint="@string/inputTransactionFragment_inputLayout_transactionLongitude_string"
+                    style="@style/inputFragment_inputLayout_style"
+                    >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editorFragment_transactionLongitude_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="numberDecimal"
+                        android:maxLength="255"
+                        style="@style/inputFragment_inputEdit_style"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputFragment_inputLayout_merchantsName_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:hint="@string/inputTransactionFragment_inputLayout_transactionMerchants_string"
+                style="@style/inputFragment_inputLayout_style"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editorFragment_transactionMerchant_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    style="@style/inputFragment_inputEdit_style"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <Button
+                    android:layout_gravity="center"
+                    android:id="@+id/editorFragment_button_submit"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/editorFragment_button_submit_string"
+                    android:gravity="center"
+                    android:backgroundTint="@color/tersier"
+                    android:textColor="@color/primary"
+                    />
+            </FrameLayout>
+
+
+        </LinearLayout>
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

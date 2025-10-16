@@ -1,7 +1,7 @@
 package com.example.raudect.model
 
 data class ListModel(
-    var testId:String,
+    var transactionId:String,
     var cardNumber:String,
     var dateOfBirth:String,
     var job:String,
