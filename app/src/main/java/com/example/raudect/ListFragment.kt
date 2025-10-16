@@ -84,6 +84,9 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //incase of past memory
+        list.clear()
+        listAdapter.setData(list)
 
         //database, auth, user, query instantiation
         cardOwnerRef = FirebaseDatabase.getInstance().getReference("card_owner_info")
