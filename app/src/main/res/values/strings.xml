@@ -6,28 +6,34 @@
     <string name="nav_header_desc">A Fraud Detection Interface between user and machine learning</string>
 
     <!--TODO: this is for fragment_input.xml-->
-    <string name="inputFragment_textView_title_string">ADD DATA</string>
+    <string name="inputFragment_textView_title_string">Check Card Information</string>
     <string name="inputFragment_inputLayout_cardNumber_string">Card Number</string>
-    <string name="inputFragment_inputLayout_dateOfBirth_string">Birth(dd/mm/yyyy)</string>
-    <string name="inputFragment_inputLayout_job_string">Job</string>
-    <string name="inputFragment_inputLayout_address_string">Your Address</string>
-    <string name="inputFragment_inputLayout_cityPopulation_string">Population in Your City</string>
-
-    <string name="inputFragment_textView_transactionTitle_string">TRANSACTION INFO</string>
-    <string name="inputFragment_inputLayout_transactionTime_string">Date(dd/mm/yyyy)</string>
-    <string name="inputFragment_inputLayout_transactionCategory_string">Category</string>
-    <string name="inputFragment_inputLayout_transactionAmount_string">Amount($USD)</string>
-    <string name="inputFragment_inputLayout_transactionLatitude_string">Latitude</string>
-    <string name="inputFragment_inputLayout_transactionLongitude_string">Longitude</string>
-    <string name="inputFragment_inputLayout_transactionMerchants_string">Merchants/Staffs</string>
-    <string name="inputFragment_button_submit_string">SUBMIT</string>
+    <string name="inputFragment_button_submit_string">Check</string>
     <!--end-->
 
+    <!--Todo: this is for fragment_register.xml-->
+    <string name="registerFragment_textView_title_string">Card Registration</string>
+    <string name="registerFragment_inputLayout_dateOfBirth_string">Birth(dd/mm/yyyy)</string>
+    <string name="registerFragment_inputLayout_job_string">Job</string>
+    <string name="registerFragment_inputLayout_address_string">Your Address</string>
+    <string name="registerFragment_inputLayout_cityPopulation_string">Population in Your City</string>
+    <string name="registerFragment_button_submit_string">Register</string>
+    <!--end-->
+
+    <!--TODO: this is for fragment_input_transaction.xml-->
+    <string name="inputTransactionFragment_textView_title_string">Add Transaction</string>
+    <string name="inputTransactionFragment_inputLayout_transactionTime_string">Date(dd/mm/yyyy)</string>
+    <string name="inputTransactionFragment_inputLayout_transactionCategory_string">Category</string>
+    <string name="inputTransactionFragment_inputLayout_transactionAmount_string">Amount($USD)</string>
+    <string name="inputTransactionFragment_inputLayout_transactionLatitude_string">Latitude</string>
+    <string name="inputTransactionFragment_inputLayout_transactionLongitude_string">Longitude</string>
+    <string name="inputTransactionFragment_inputLayout_transactionMerchants_string">Merchants/Staffs</string>
+    <string name="inputTransactionFragment_button_submit_string">Submit</string>
+    <!-- end -->
 
     <!--TODO: this is for fragment_input.xml-->
     <string name="listFragment_textView_title_string">TRANSACTION LIST</string>
     <!--end-->
-
 
     <!--TODO: this is for fragment_detail.xml-->
     <string name="detailFragment_textView_title_string">PERSONAL INFO</string>

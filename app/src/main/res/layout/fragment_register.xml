@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".RegisterFragment"
+    android:padding="10dp"
+    android:id="@+id/mainLayout"
+    android:background="@color/secondary"
+    >
+
+    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/custom_border"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="@id/mainLayout"
+            android:layout_margin="10dp"
+            android:paddingBottom="20dp"
+            >
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/registerFragment_textView_title_string"
+                style="@style/inputFragment_title_style"
+                />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_margin="15dp"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:baselineAligned="false"
+                >
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/registerFragment_inputLayout_cardNumber_layout"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    style="@style/inputFragment_inputLayout_style"
+                    >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/registerFragment_inputEdit_cardNumber_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="numberDecimal"
+                        android:maxLength="19"
+                        android:hint="@string/inputFragment_inputLayout_cardNumber_string"
+                        style="@style/inputFragment_inputEdit_style"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/registerFragment_inputLayout_dateOfBirth_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:hint="@string/registerFragment_inputLayout_dateOfBirth_string"
+                style="@style/inputFragment_inputLayout_style"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/registerFragment_inputEdit_dateOfBirth_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text"
+                    android:maxLength="255"
+                    style="@style/inputFragment_inputEdit_style"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/registerFragment_inputLayout_job_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:hint="@string/registerFragment_inputLayout_job_string"
+                style="@style/inputFragment_inputLayout_style"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/registerFragment_inputEdit_job_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text"
+                    android:maxLength="255"
+                    style="@style/inputFragment_inputEdit_style"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/registerFragment_inputLayout_address_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:hint="@string/registerFragment_inputLayout_address_string"
+                style="@style/inputFragment_inputLayout_style"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/registerFragment_inputEdit_address_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text"
+                    android:maxLength="255"
+                    style="@style/inputFragment_inputEdit_style"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/registerFragment_inputLayout_cityPopulation_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:hint="@string/registerFragment_inputLayout_cityPopulation_string"
+                style="@style/inputFragment_inputLayout_style"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/registerFragment_inputEdit_cityPopulation_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="numberDecimal"
+                    android:maxLength="255"
+                    style="@style/inputFragment_inputEdit_style"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                >
+                <Button
+                    android:layout_gravity="center"
+                    android:id="@+id/registerFragment_button_submit"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/registerFragment_button_submit_string"
+                    android:gravity="center"
+                    android:backgroundTint="@color/tersier"
+                    android:textColor="@color/primary"
+                    />
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -40,9 +41,6 @@ class ListFragment : Fragment() {
                 //set on click listener
                 override fun onItemClick(list: ListModel, position : Int) {
                     //when item element is clicked
-                    //im still thinking about which method to choose for a similar effect to html GET or POST request.
-                    //findNavController().navigate(R.id.actionName, bundle)
-
                     val testId = list.testId
 
                     val bundle = Bundle().apply {
@@ -61,7 +59,8 @@ class ListFragment : Fragment() {
 
 
     //database, auth, list init
-    private lateinit var fraudTestRef: DatabaseReference
+    private lateinit var cardOwnerRef: DatabaseReference
+    private lateinit var transactionRef: DatabaseReference
     private lateinit var auth: FirebaseAuth
     private val list = mutableListOf<ListModel>()
 
@@ -97,52 +96,64 @@ class ListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //database, auth, user, query instantiation
-        fraudTestRef = FirebaseDatabase.getInstance().getReference("fraud_test_info")
+        cardOwnerRef = FirebaseDatabase.getInstance().getReference("card_owner_info")
+        transactionRef = FirebaseDatabase.getInstance().getReference("transaction_info")
         auth = FirebaseAuth.getInstance()
         val user = auth.currentUser
-        val query = fraudTestRef.orderByChild("uid").equalTo(user?.uid)
 
-        //getting list of data from database
+        //getting transaction data & card owner data
+        //transaction query
+        val query = transactionRef.orderByChild("uid").equalTo(user?.uid)
         query.get().addOnSuccessListener { snapshot ->
             if(snapshot.exists()){
-                list.clear()
-                for(child in snapshot.children){
-                    //child is equivalent to a row
+                list.clear()//in case it's not empty
+
+                //row extraction on transaction
+                for(transaction in snapshot.children){
+                    //translate boolean to enum for data model
                     lateinit var indication: Indication
-                    if(child.child("isfraud").getValue().toString().toBoolean()){
+                    if(transaction.child("isfraud").getValue().toString().toBoolean()){
                         indication = Indication.SUSPICIOUS
                     }
                     else{
                         indication = Indication.NORMAL
                     }
 
-                    list.add(
-                        ListModel(
-                            testId =child.child("tid").getValue().toString(),
-                            cardNumber=child.child("cardnum").getValue().toString(),
-                            dateOfBirth=child.child("dateofbirth").getValue().toString(),
-                            job=child.child("job").getValue().toString(),
-                            address=child.child("address").getValue().toString(),
-                            cityPopulation=child.child("citypop").getValue().toString(),
-                            transactionTime=child.child("date").getValue().toString(),
-                            transactionCategory=child.child("category").getValue().toString(),
-                            transactionAmount=child.child("amount").getValue().toString(),
-                            transactionLatitude=child.child("lat").getValue().toString(),
-                            transactionLongitude=child.child("lon").getValue().toString(),
-                            transactionMerchants=child.child("merchant").getValue().toString(),
-                            indicator = indication
-                        )
-                    )
+                    cardOwnerRef.child(transaction.child("cardnum").getValue().toString())
+                        .get().addOnSuccessListener { cardOwner ->
+                            //adding all data
+                            list.add(
+                                ListModel(
+                                    testId =transaction.child("tid").getValue().toString(),
+
+                                    cardNumber=cardOwner.child("cardnum").getValue().toString(),
+                                    dateOfBirth=cardOwner.child("dateofbirth").getValue().toString(),
+                                    job=cardOwner.child("job").getValue().toString(),
+                                    address=cardOwner.child("address").getValue().toString(),
+                                    cityPopulation=cardOwner.child("citypop").getValue().toString(),
+
+                                    transactionTime=transaction.child("date").getValue().toString(),
+                                    transactionCategory=transaction.child("category").getValue().toString(),
+                                    transactionAmount=transaction.child("amount").getValue().toString(),
+                                    transactionLatitude=transaction.child("lat").getValue().toString(),
+                                    transactionLongitude=transaction.child("lon").getValue().toString(),
+                                    transactionMerchants=transaction.child("merchant").getValue().toString(),
+                                    indicator = indication
+                                )
+                            )
+                        }. addOnFailureListener { e->
+                            Toast.makeText(context, "Error card owner: ${e.message}", Toast.LENGTH_LONG).show()
+                        }
+
+
+
                 }
-            }
-            else{
-                //when there is no data
             }
             //set data
             listAdapter.setData(list)
         }.
         addOnFailureListener {e->
-            Log.e("Firebase", "Failed: ${e.message}")
+            Toast.makeText(context, "Error setting item data: ${e.message}", Toast.LENGTH_LONG).show()
         }
     }
 }

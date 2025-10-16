@@ -8,11 +8,34 @@
     <fragment
         android:id="@+id/inputFragment"
         android:name="com.example.raudect.InputFragment"
-        android:label="Add Data"
+        android:label="Check Information"
         tools:layout="@layout/fragment_input"
         >
         <action
-            android:id="@+id/action_inputFragment_listFragment"
+            android:id="@+id/action_inputFragment_registerFragment"
+            app:destination="@id/registerFragment"/>
+        <action
+            android:id="@+id/action_inputFragment_inputTransactionFragment"
+            app:destination="@id/inputTransactionFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.raudect.RegisterFragment"
+        android:label="Add card into db"
+        tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/action_registerFragment_inputTransactionFragment"
+            app:destination="@id/inputTransactionFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/inputTransactionFragment"
+        android:name="com.example.raudect.InputTransactionFragment"
+        android:label="Add Transaction into db"
+        tools:layout="@layout/fragment_input_transaction">
+        <action
+            android:id="@+id/action_inputTransactionFragment_listFragment"
             app:destination="@id/listFragment"/>
     </fragment>
 
