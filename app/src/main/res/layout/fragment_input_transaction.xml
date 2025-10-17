@@ -61,7 +61,7 @@
                         android:id="@+id/inputTransactionFragment_inputEdit_transactionTime_layout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:inputType="numberDecimal"
+                        android:inputType="datetime"
                         android:maxLength="255"
                         style="@style/inputFragment_inputEdit_style"
                         />
@@ -80,7 +80,7 @@
                         android:id="@+id/inputTransactionFragment_inputEdit_category_layout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:inputType="numberDecimal"
+                        android:inputType="text"
                         android:maxLength="255"
                         style="@style/inputFragment_inputEdit_style"
                         />
@@ -162,7 +162,7 @@
                     android:id="@+id/inputTransactionFragment_inputEdit_merchantsName_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:inputType="numberDecimal"
+                    android:inputType="text"
                     android:maxLength="255"
                     style="@style/inputFragment_inputEdit_style"
                     />

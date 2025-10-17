@@ -67,6 +67,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="@string/inputFragment_inputLayout_cardNumber_string"
+                        android:inputType="numberDecimal"
                         style="@style/inputFragment_inputEdit_style"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -91,6 +92,7 @@
                         android:id="@+id/editorFragment_transactionTime_id"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:inputType="datetime"
                         style="@style/inputFragment_inputEdit_style"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -108,6 +110,7 @@
                         android:id="@+id/editorFragment_category_id"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:inputType="text"
                         style="@style/inputFragment_inputEdit_style"
                         />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -188,6 +191,7 @@
                     android:id="@+id/editorFragment_transactionMerchant_id"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:inputType="text"
                     style="@style/inputFragment_inputEdit_style"
                     />
             </com.google.android.material.textfield.TextInputLayout>
