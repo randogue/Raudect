@@ -5,11 +5,39 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.paint
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -72,7 +100,93 @@ class AboutFragment : Fragment() {
 
 @Composable
 fun ComposableContent() {
-    Text("Hello World!")
+    // Use your primary background
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(colorResource(id = R.color.primary))
+    ) {
+        // Scrollable content
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+        ) {
+
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(colorResource(id = R.color.secondary))
+                    .padding(30.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.main_icon),
+                    contentDescription = "App Logo",
+                    modifier = Modifier.size(120.dp)
+                )
+                Text(
+                    text = stringResource(id = R.string.app_title),
+                    fontSize = 26.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = colorResource(id = R.color.tersier)
+                )
+            }
+
+            // Divider
+            HorizontalDivider(
+                modifier = Modifier.fillMaxWidth(),
+                thickness = 2.dp,
+                color = colorResource(id = R.color.tersier)
+            )
+
+            // ---------- Body Section ----------
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(20.dp)
+            ) {
+
+                // Title
+                Text(
+                    text = stringResource(id = R.string.aboutFragment_textView_titleWhat_string),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(10.dp),
+                    fontSize = 16.sp,
+                    textAlign = TextAlign.Center
+                )
+
+                // Center divider
+                HorizontalDivider(
+                    modifier = Modifier
+                        .width(200.dp)
+                        .align(Alignment.CenterHorizontally),
+                    thickness = 2.dp,
+                    color = colorResource(id = R.color.tersier)
+                )
+
+                // About Raudect Text Box
+                Text(
+                    text = stringResource(id = R.string.aboutFragment_textView_whatIsRaudect_string),
+                    modifier = Modifier
+                        .padding(
+                            start = 30.dp,
+                            end = 30.dp,
+                            top = 15.dp
+                        )
+                        .background(
+                            color = colorResource(R.color.primary)
+                        )
+                        .border(
+                            border = BorderStroke(1.dp, Color.Black),
+                            shape = RectangleShape
+                        )
+                        .padding(20.dp)
+                )
+            }
+        }
+    }
 }
 
 @Preview
