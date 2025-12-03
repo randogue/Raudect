@@ -41,6 +41,7 @@ android {
     }
     buildFeatures {
         compose = true
+        viewBinding = true
     }
 }
 
@@ -88,4 +89,7 @@ dependencies {
 
     //work manager dependencies
     implementation(libs.androidx.work.runtime)
+
+    //livedata dependencies
+    implementation(libs.androidx.lifecycle.livedata)
 }

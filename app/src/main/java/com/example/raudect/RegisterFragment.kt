@@ -7,7 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.raudect.model.RegisterViewModel
+import com.example.raudect.model.RegisterViewModelFactory
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -23,6 +27,10 @@ class RegisterFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
 
 
+    //view model
+    private val vm by lazy {
+        ViewModelProvider(this, RegisterViewModelFactory(cardNumber.toString())).get(RegisterViewModel::class.java)
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,6 +68,50 @@ class RegisterFragment : Fragment() {
         //if card number got passed
         if(!cardNumber.isNullOrBlank()){
             pCardNumber.setText(cardNumber)
+        }
+
+        //View Model Implementation
+        //observe...
+        vm.ccnum.observe(viewLifecycleOwner){
+            if(pCardNumber.text.toString() != it){
+                pCardNumber.setText(it)
+            }
+        }
+        vm.birth.observe(viewLifecycleOwner){
+            if(pDateOfBirth.text.toString() != it){
+                pDateOfBirth.setText(it)
+            }
+        }
+        vm.job.observe(viewLifecycleOwner){
+            if(pJob.text.toString() != it){
+                pJob.setText(it)
+            }
+        }
+        vm.addr.observe(viewLifecycleOwner){
+            if(pAddress.text.toString() != it){
+                pAddress.setText(it)
+            }
+        }
+        vm.citypop.observe(viewLifecycleOwner){
+            if(pCityPopulation.text.toString() != it){
+                pCityPopulation.setText(it)
+            }
+        }
+        //set...
+        pCardNumber.addTextChangedListener {
+            vm.setCcnum(pCardNumber.text.toString())
+        }
+        pDateOfBirth.addTextChangedListener {
+            vm.setBirth(pDateOfBirth.text.toString())
+        }
+        pJob.addTextChangedListener {
+            vm.setJob(pJob.text.toString())
+        }
+        pAddress.addTextChangedListener {
+            vm.setAddr(pAddress.text.toString())
+        }
+        pCityPopulation.addTextChangedListener {
+            vm.setCityPop(pCityPopulation.text.toString())
         }
 
         //set on click at submit button

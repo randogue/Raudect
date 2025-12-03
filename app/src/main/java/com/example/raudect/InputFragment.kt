@@ -10,7 +10,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.raudect.model.InputViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -22,6 +25,12 @@ class InputFragment : Fragment() {
     //db & auth init
     private lateinit var cardOwnerRef: DatabaseReference
     private lateinit var auth: FirebaseAuth
+
+
+    //viewmodel
+    private val vm by lazy {
+        ViewModelProvider(this).get(InputViewModel::class.java)
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,6 +62,19 @@ class InputFragment : Fragment() {
         //input view holding
         //personal
         val pCardNumber = view.findViewById<TextInputEditText>(R.id.inputFragment_inputEdit_cardNumber_layout)
+
+
+        //View Model Implementation
+        //observe view model
+        vm.ccnum.observe(viewLifecycleOwner){
+            if(pCardNumber.text.toString() != it){
+                pCardNumber.setText(it)
+            }
+        }
+        //set input into view model on change
+        pCardNumber.addTextChangedListener {
+            vm.setText(pCardNumber.text.toString())
+        }
 
 
         //set on click for submit

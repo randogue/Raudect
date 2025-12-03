@@ -7,7 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.raudect.model.InputTransactionViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -22,6 +25,12 @@ class InputTransactionFragment : Fragment() {
     //db & auth init
     private lateinit var transactionRef: DatabaseReference
     private lateinit var auth: FirebaseAuth
+
+
+    //ViewModel
+    private val vm by lazy{
+        ViewModelProvider(this).get(InputTransactionViewModel::class.java)
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +60,60 @@ class InputTransactionFragment : Fragment() {
         val tLatitude = view.findViewById<TextInputEditText>(R.id.inputTransactionFragment_inputEdit_transactionLatitude_layout)
         val tLongitude = view.findViewById<TextInputEditText>(R.id.inputTransactionFragment_inputEdit_transactionLongitude_layout)
         val tMerchant = view.findViewById<TextInputEditText>(R.id.inputTransactionFragment_inputEdit_merchantsName_layout)
+
+
+        //View Model Implementation
+        //observe...
+        vm.tTime.observe(viewLifecycleOwner){
+            if(tTime.text.toString() != it){
+                tTime.setText(it)
+            }
+        }
+        vm.tCategory.observe(viewLifecycleOwner){
+            if(tCategory.text.toString() != it){
+                tCategory.setText(it)
+            }
+        }
+        vm.tAmount.observe(viewLifecycleOwner){
+            if(tAmount.text.toString() != it){
+                tAmount.setText(it)
+            }
+        }
+        vm.tLatitude.observe(viewLifecycleOwner){
+            if(tLatitude.text.toString() != it){
+                tLatitude.setText(it)
+            }
+        }
+        vm.tLongitude.observe(viewLifecycleOwner){
+            if(tLongitude.text.toString() != it){
+                tLongitude.setText(it)
+            }
+        }
+        vm.tMerchant.observe(viewLifecycleOwner){
+            if(tMerchant.text.toString() != it){
+                tMerchant.setText(it)
+            }
+        }
+        //set...
+        tTime.addTextChangedListener {
+            vm.setTime(tTime.text.toString())
+        }
+        tCategory.addTextChangedListener {
+            vm.setCategory(tCategory.text.toString())
+        }
+        tAmount.addTextChangedListener {
+            vm.setAmount(tAmount.text.toString())
+        }
+        tLatitude.addTextChangedListener {
+            vm.setLatitude(tLatitude.text.toString())
+        }
+        tLongitude.addTextChangedListener {
+            vm.setLongitude(tLongitude.text.toString())
+        }
+        tMerchant.addTextChangedListener {
+            vm.setMerchant(tMerchant.text.toString())
+        }
+
 
         //set on click for submit
         view.findViewById<Button>(R.id.inputTransactionFragment_button_submit).setOnClickListener {
