@@ -70,7 +70,7 @@ class AboutFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent{
-                ComposableContent()
+                aboutLayout()
             }
         }
     }
@@ -99,20 +99,20 @@ class AboutFragment : Fragment() {
 
 
 @Composable
-fun ComposableContent() {
-    // Use your primary background
+fun aboutLayout() {
+    //Div All
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(colorResource(id = R.color.primary))
     ) {
-        // Scrollable content
+        //Content
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
         ) {
-
+            //Head-----------------------------------------
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -140,14 +140,13 @@ fun ComposableContent() {
                 color = colorResource(id = R.color.tersier)
             )
 
-            // ---------- Body Section ----------
+            //Body -------------------------------------------------------
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(20.dp)
             ) {
-
-                // Title
+                //Title
                 Text(
                     text = stringResource(id = R.string.aboutFragment_textView_titleWhat_string),
                     modifier = Modifier
@@ -157,7 +156,7 @@ fun ComposableContent() {
                     textAlign = TextAlign.Center
                 )
 
-                // Center divider
+                //Divider
                 HorizontalDivider(
                     modifier = Modifier
                         .width(200.dp)
@@ -166,7 +165,7 @@ fun ComposableContent() {
                     color = colorResource(id = R.color.tersier)
                 )
 
-                // About Raudect Text Box
+                //Description
                 Text(
                     text = stringResource(id = R.string.aboutFragment_textView_whatIsRaudect_string),
                     modifier = Modifier
@@ -191,6 +190,6 @@ fun ComposableContent() {
 
 @Preview
 @Composable
-fun ComposableContentPreview() {
-    ComposableContent()
+fun aboutLayoutPreview() {
+    aboutLayout()
 }

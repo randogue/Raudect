@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.view.ContextThemeWrapper
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -24,11 +23,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.res.colorResource
@@ -47,10 +43,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [ImportFragment.newInstance] factory method to
+ * Use the [AboutUsFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ImportFragment : Fragment() {
+class AboutUsFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -66,12 +62,12 @@ class ImportFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         return ComposeView(requireContext()).apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent{
-                importLayout()
+                AboutUsLayout()
             }
         }
     }
@@ -83,104 +79,115 @@ class ImportFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment ImportFragment.
+         * @return A new instance of fragment AboutFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            ImportFragment().apply {
+            AboutFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
                 }
             }
     }
+}
 
 
 
-
-
-    @Composable
-    fun importLayout() {
-        val tersierColor = colorResource(R.color.tersier)
-        // Root Background
-        Box(
+@Composable
+fun AboutUsLayout() {
+    //Div All
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(colorResource(id = R.color.primary))
+    ) {
+        //Content
+        Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(colorResource(id = R.color.secondary))
-                .padding(10.dp)
+                .verticalScroll(rememberScrollState())
         ) {
-
-            // Scroll container with custom border
+            //Head-----------------------------------------
             Column(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .verticalScroll(rememberScrollState())
-                    .background(
-                        color = colorResource(R.color.primary)
-                    )
-                    .border(
-                        border = BorderStroke(1.dp, Color.Black),
-                        shape = RectangleShape
-                    )
-                    .padding(16.dp)
+                    .fillMaxWidth()
+                    .background(colorResource(id = R.color.secondary))
+                    .padding(30.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                Image(
+                    painter = painterResource(id = R.drawable.main_icon),
+                    contentDescription = "App Logo",
+                    modifier = Modifier.size(120.dp)
+                )
+                Text(
+                    text = stringResource(id = R.string.app_title),
+                    fontSize = 26.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = colorResource(id = R.color.tersier)
+                )
+            }
 
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
+            // Divider
+            HorizontalDivider(
+                modifier = Modifier.fillMaxWidth(),
+                thickness = 2.dp,
+                color = colorResource(id = R.color.tersier)
+            )
 
-                    // 300dp x 300dp inner dotted border box
-                    Box(
-                        modifier = Modifier
-                            .size(300.dp)
-                            .padding(50.dp)
-                            .drawBehind {
+            //Body -------------------------------------------------------
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(20.dp)
+            ) {
+                //Title
+                Text(
+                    text = stringResource(id = R.string.aboutUsFragment_textView_titleWho_string),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(10.dp),
+                    fontSize = 16.sp,
+                    textAlign = TextAlign.Center
+                )
 
-                                // Draw dashed border same as XML
-                                val strokeWidth = 4.dp.toPx()
-                                val dashWidth = 12.dp.toPx()
-                                val dashGap = 12.dp.toPx()
+                //Divider
+                HorizontalDivider(
+                    modifier = Modifier
+                        .width(200.dp)
+                        .align(Alignment.CenterHorizontally),
+                    thickness = 2.dp,
+                    color = colorResource(id = R.color.tersier)
+                )
 
-                                val stroke = Stroke(
-                                    width = strokeWidth,
-                                    pathEffect = PathEffect.dashPathEffect(
-                                        floatArrayOf(dashWidth, dashGap)
-                                    )
-                                )
-
-                                drawRect(
-                                    color = tersierColor,
-                                    style = stroke
-                                )
-                            },
-                        contentAlignment = Alignment.Center
-                    ) {
-
-                        // Import Text
-                        Text(
-                            text = "Import .csv File",
-                            modifier = Modifier
-                                .background(
-                                    color = colorResource(R.color.primary)
-                                )
-                                .border(
-                                    border = BorderStroke(1.dp, Color.Black),
-                                    shape = RectangleShape
-                                )
-                                .padding(10.dp),
-                            textAlign = TextAlign.Center
+                //Description
+                Text(
+                    text = stringResource(id = R.string.aboutUsFragment_textView_whoAreWe_string),
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .padding(
+                            start = 30.dp,
+                            end = 30.dp,
+                            top = 15.dp
                         )
-                    }
-                }
+                        .background(
+                            color = colorResource(R.color.primary)
+                        )
+                        .border(
+                            border = BorderStroke(1.dp, Color.Black),
+                            shape = RectangleShape
+                        )
+                        .padding(20.dp)
+                )
             }
         }
     }
+}
 
-    @Preview
-    @Composable
-    fun importLayoutPreview() {
-        importLayout()
-    }
+@Preview
+@Composable
+fun AboutUsLayoutPreview() {
+    AboutUsLayout()
 }

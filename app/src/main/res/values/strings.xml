@@ -62,6 +62,13 @@
 
     <!--TODO: this is for fragment_about.xml-->
     <string name="aboutFragment_textView_titleWhat_string">WHAT IS RAUDECT?</string>
+    <string name="aboutFragment_textView_whatIsRaudect_string">Raudect is an application that predicts whether or not a transaction were made by it\'s legitimate owner or by a fraudster who have stolen the card owner\'s credential.</string>
+    <!--end-->
+
+
+    <!--TODO: this is for fragment_about_us.xml-->
+    <string name="aboutUsFragment_textView_titleWho_string">WHO ARE WE?</string>
+    <string name="aboutUsFragment_textView_whoAreWe_string">We are a group of informatics undergraduate who that has been assigned a project as our final exam, where we need to create an application that implements things that we\'ve learnt. Additionally, we are also assigned to create a Machine Learning Model from another lecture and implementing the model into our mobile application as well.</string>
     <!--end-->
 
 
@@ -85,13 +92,13 @@
     <!--TODO: this is for Tabbed Navigation IndividualAdapter.kt-->
     <string name="individualAdapter_tab_detailFragment_string">Detail</string>
     <string name="individualAdapter_tab_editorFragment_string">Editor</string>
-    <string name="aboutFragment_textView_whatIsRaudect_string">Raudect is an application that predicts whether or not a transaction were made by it\'s legitimate owner or by a fraudster who have stolen the card owner\'s credential.</string>
     <!--end-->
 
     <!--TODO: this is for Drawer Navigation-->
     <string name="drawer_importFragment_string">Import CSV</string>
     <string name="drawer_profileFragment_string">Profile</string>
-    <string name="drawer_aboutFragment_string">About Us</string>
+    <string name="drawer_aboutFragment_string">About App</string>
+    <string name="drawer_aboutUsFragment_string">About Us</string>
     <!--end-->
 
     <!--TODO: this is for Bottom Navigation-->
