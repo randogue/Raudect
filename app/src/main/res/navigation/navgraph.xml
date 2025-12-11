@@ -59,6 +59,9 @@
         android:label="Individual Data"
         tools:layout="@layout/fragment_individual"
         >
+        <action
+            android:id="@+id/action_individualFragment_listFragment"
+            app:destination="@id/listFragment"/>
     </fragment>
 
     <fragment

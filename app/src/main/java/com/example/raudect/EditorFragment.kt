@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -110,6 +112,32 @@ class EditorFragment : Fragment() {
                     Toast.makeText(context, "Failed to updated data, ${e.message}", Toast.LENGTH_SHORT).show()
                 }
         }
+
+        //setting onclick for deleting
+        view.findViewById<Button>(R.id.editorFragment_button_delete)
+            .setOnClickListener {
+                val builder = AlertDialog.Builder(requireContext())
+                builder.setTitle("Deleting a Transaction Data")
+                builder.setMessage("Are you sure you want to delete this data?")
+                builder.setPositiveButton("Yes"){ dialog, _->
+                    transactionRef.child(transactionId.toString()).removeValue()
+                        .addOnSuccessListener {
+                            Toast.makeText(context, "data related to user deleted", Toast.LENGTH_SHORT).show()
+                            findNavController().navigate(R.id.action_individualFragment_listFragment)
+                        }
+                        .addOnFailureListener { e->
+                            Toast.makeText(context, "Failed to delete data: ${e.message}!", Toast.LENGTH_LONG).show()
+                        }
+                    dialog.dismiss()
+                }
+
+                builder.setNegativeButton("No"){dialog, _->
+                    dialog.dismiss()
+                }
+
+                builder.show()
+            }
+
     }
 
     companion object {

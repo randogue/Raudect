@@ -196,9 +196,10 @@
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <FrameLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 >
                 <Button
                     android:layout_gravity="center"
@@ -210,7 +211,19 @@
                     android:backgroundTint="@color/tersier"
                     android:textColor="@color/primary"
                     />
-            </FrameLayout>
+                <Button
+                    android:layout_gravity="center"
+                    android:id="@+id/editorFragment_button_delete"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="@string/profileFragment_button_delete_string"
+                    android:gravity="center"
+                    android:backgroundTint="@color/suspicious"
+                    android:textColor="@color/primary"
+
+                    />
+            </LinearLayout>
 
 
         </LinearLayout>
