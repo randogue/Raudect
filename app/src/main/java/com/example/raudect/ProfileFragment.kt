@@ -201,7 +201,7 @@ class ProfileFragment : Fragment() {
             photoDir
         )
         takePicture.launch(photoUri) //save camera result to the uri
-        profileBinder.setImageURI(null)
+        profileBinder.invalidate()
         Glide.with(requireContext())
             .load(photoUri)
             .into(profileBinder)
