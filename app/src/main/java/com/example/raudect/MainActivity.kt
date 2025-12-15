@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        //firebase database ref
+        //firebase database ref---------------------------
         auth = FirebaseAuth.getInstance()
         usersRef = FirebaseDatabase.getInstance().getReference("users")
         val user = auth.currentUser
@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
                 Log.w("MAIN_ACTIVITY", "Failed to register user: ${e.message}")
                 Toast.makeText(this, "Failed to register user: ${e.message}", Toast.LENGTH_LONG).show()
             }
-        }
+        }//--------------------------------
 
 
         //navigation, fragment, etc
