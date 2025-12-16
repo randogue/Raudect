@@ -11,6 +11,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.core.view.ViewCompat
@@ -21,6 +22,9 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.raudect.model.main.MainViewModel
+import com.example.raudect.model.main.MainViewModelFactory
+import com.example.raudect.model.repository.FirebaseDatabaseRepository
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -33,8 +37,10 @@ import java.text.SimpleDateFormat
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
 
-    private lateinit var auth: FirebaseAuth
-    private lateinit var usersRef: DatabaseReference
+    //view model instantiation
+    private val mainViewModel: MainViewModel by viewModels {
+        MainViewModelFactory(FirebaseDatabaseRepository())
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,25 +55,19 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        //firebase database ref---------------------------
-        auth = FirebaseAuth.getInstance()
-        usersRef = FirebaseDatabase.getInstance().getReference("users")
-        val user = auth.currentUser
-
-        //register if new UID
-        if(user != null){
-            usersRef.child(user.uid).get().addOnSuccessListener {
-                //check if exist
-                if(!it.exists()){
-                    val userRef = usersRef.child(user.uid)
-                    userRef.child("username").setValue(user.displayName)
-                    userRef.child("uid").setValue((user.uid))
-                }
-            }.addOnFailureListener { e->
-                Log.w("MAIN_ACTIVITY", "Failed to register user: ${e.message}")
-                Toast.makeText(this, "Failed to register user: ${e.message}", Toast.LENGTH_LONG).show()
+        //ViewModel Communication
+        mainViewModel.loginState.observe(this){loginState ->
+            if(loginState){
+                Toast.makeText(this, "Successfully register user's information to Database", Toast.LENGTH_SHORT).show()
             }
-        }//--------------------------------
+        }
+
+        try {
+            mainViewModel.checkUserInfoInDatabase()
+        }
+        catch (e: Exception){
+            Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_LONG).show()
+        }
 
 
         //navigation, fragment, etc
