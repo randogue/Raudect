@@ -4,15 +4,23 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.raudect.model.repository.FirebaseDatabaseRepository
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DatabaseReference
 
 class MainViewModel(private val firebaseDatabaseRepository: FirebaseDatabaseRepository): ViewModel() {
+    //shared variable
+    private val _selectTransactionId = MutableLiveData<String>()
+    val selectTransactionId: LiveData<String> = _selectTransactionId
+
+    //activity's variable
     private val _currentUser = firebaseDatabaseRepository.getCurrentUser()
     private val _userRef = firebaseDatabaseRepository.getUserRef()
 
     private val _loginState = MutableLiveData<Boolean>()
     val loginState: LiveData<Boolean> = _loginState
+
+    //save transactionId into vm for sharing between fragment
+    fun setSelectTransactionId(transactionId: String){
+        _selectTransactionId.value = transactionId
+    }
 
     //record first time user into database
     //contain throwable Exception

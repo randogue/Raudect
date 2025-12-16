@@ -13,7 +13,7 @@ class ListAdapter(
     private val onClickListener: OnClickListener
 ) : RecyclerView.Adapter<ListViewHolder>()
 {
-    //List Adapter atr
+    //List Adapter atr ------------------------------------------------------need to be saved from viewmodel
     private val listOfList = mutableListOf<ListModel>()
     //reason we use val from the lab module might be because they want to add constraint so that to edit the content, we must use mutableList function.
 
