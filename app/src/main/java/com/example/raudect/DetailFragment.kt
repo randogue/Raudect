@@ -7,19 +7,29 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import com.example.raudect.model.detail.DetailViewModel
+import com.example.raudect.model.detail.DetailViewModelFactory
+import com.example.raudect.model.main.MainViewModel
+import com.example.raudect.model.repository.FirebaseDatabaseRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 
 class DetailFragment : Fragment() {
+    private val mainViewModel: MainViewModel by activityViewModels()
+    private val detailViewModel: DetailViewModel by viewModels {
+        DetailViewModelFactory(FirebaseDatabaseRepository())
+    }
     //passed arg init
-    private var transactionId: String? = null
+    //private var transactionId: String? = null=================================
 
-    //database + auth init
+    //database + auth init--------------------------------------------------------
     private lateinit var cardOwnerRef: DatabaseReference
     private lateinit var transactionRef: DatabaseReference
-    private lateinit var auth: FirebaseAuth
+    private lateinit var auth: FirebaseAuth//+++++++++++++++++++++++++++++++++++++++++++
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,9 +46,6 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //receiving bundle from individual adapter
-        transactionId = arguments?.getString("tid")
-
         //view holding
         val cardNumber = view.findViewById<TextView>(R.id.detailFragment_cardNumber_id)
         val dateOfBirth = view.findViewById<TextView>(R.id.detailFragment_dateOfBirth_id)
@@ -53,60 +60,30 @@ class DetailFragment : Fragment() {
         val lon = view.findViewById<TextView>(R.id.detailFragment_transactionLongitude_id)
         val merchant = view.findViewById<TextView>(R.id.detailFragment_transactionMerchant_id)
 
-        //auth + db instantiation
-        cardOwnerRef = FirebaseDatabase.getInstance().getReference("card_owner_info")
-        transactionRef = FirebaseDatabase.getInstance().getReference("transaction_info")
-        auth = FirebaseAuth.getInstance()
-        val user = auth.currentUser
-
-        //getting transaction and personal data
-        transactionRef.child(transactionId.toString()).get()
-            .addOnSuccessListener { transaction->
-                if(transaction.exists()){
-                    //filling transaction detail
-                    date.text = transaction.child("date").getValue().toString()
-                    category.text = transaction.child("category").getValue().toString()
-                    amount.text = transaction.child("amount").getValue().toString()
-                    lat.text = transaction.child("lat").getValue().toString()
-                    lon.text = transaction.child("lon").getValue().toString()
-                    merchant.text = transaction.child("merchant").getValue().toString()
-
-                    //getting personal data
-                    cardOwnerRef.child(transaction.child("cardnum").getValue().toString())
-                        .get().addOnSuccessListener { card->
-                            if(card.exists()){
-                                //filling personal detail
-                                cardNumber.text = card.child("cardnum").getValue().toString()
-                                dateOfBirth.text = card.child("dateofbirth").getValue().toString()
-                                job.text = card.child("job").getValue().toString()
-                                address.text = card.child("address").getValue().toString()
-                                cityPopulation.text = card.child("citypop").getValue().toString()
-                            }
-                            else{
-                                Toast.makeText(context, "Card Owner details not found", Toast.LENGTH_LONG).show()
-                            }
-                        }
-                        .addOnFailureListener { e->
-                            Toast.makeText(context, "Error setting item data: ${e.message}", Toast.LENGTH_LONG).show()
-                        }
-                }
-                else{
-                    Toast.makeText(context, "Transaction details not found", Toast.LENGTH_LONG).show()
-                }
+        //transactionId from shared, load Listmodel into vm
+        mainViewModel.selectTransactionId.observe(viewLifecycleOwner){transactionId ->
+            try {
+                detailViewModel.loadDataFromTransactionId(transactionId)
             }
-            .addOnFailureListener { e->
-                Toast.makeText(context, "Error setting item data: ${e.message}", Toast.LENGTH_LONG).show()
+            catch (e: Exception){
+                Toast.makeText(context, "Error: ${e.message}", Toast.LENGTH_LONG).show()
             }
-    }
+        }
 
-    companion object {
-        fun newInstance(transactionId: String?): DetailFragment {
-            val fragment = DetailFragment()
-            val bundle = Bundle()
-            bundle.putString("tid", transactionId)
-            fragment.arguments = bundle
-            return fragment
+        //binding data from vm to view
+        detailViewModel.data.observe(viewLifecycleOwner){ data ->
+            cardNumber.text = data.cardNumber
+            dateOfBirth.text = data.dateOfBirth
+            job.text = data.job
+            address.text = data.address
+            cityPopulation.text = data.cityPopulation
+
+            date.text = data.transactionTime
+            category.text = data.transactionCategory
+            amount.text = data.transactionAmount
+            lat.text = data.transactionLatitude
+            lon.text = data.transactionLongitude
+            merchant.text = data.transactionMerchants
         }
     }
-
 }

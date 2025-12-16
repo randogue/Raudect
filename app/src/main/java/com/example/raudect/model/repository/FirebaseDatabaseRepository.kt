@@ -1,18 +1,20 @@
 package com.example.raudect.model.repository
 
+import android.widget.Toast
 import com.example.raudect.model.Indication
 import com.example.raudect.model.ListModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import kotlin.toString
 
 class FirebaseDatabaseRepository {
     //there's many query requiring the uid of the current user for security purpose
     val auth = FirebaseAuth.getInstance()
     val dbRef = FirebaseDatabase.getInstance()
 
-    //ref
+    //ref TODO need to be privatized
     fun getUserRef() = dbRef.getReference("users")
     fun getCardRef() = dbRef.getReference("card_owner_info")
     fun getTransactionRef() = dbRef.getReference("transaction_info")
@@ -117,5 +119,56 @@ class FirebaseDatabaseRepository {
         else{
             callback(Result.failure(NullPointerException("Uid Is Null")))
         }
+    }
+
+    fun getTransactionDataById(transactionId: String, callback: (Result<ListModel>) -> Unit){
+        getTransactionRef().child(transactionId).get()
+            .addOnSuccessListener { transaction ->
+                if(transaction.exists()){
+                    getCardRef().child(transaction.child("cardnum").getValue().toString()).get()
+                        .addOnSuccessListener { card ->
+                            val date = transaction.child("date").getValue().toString()
+                            val category = transaction.child("category").getValue().toString()
+                            val amount = transaction.child("amount").getValue().toString()
+                            val lat = transaction.child("lat").getValue().toString()
+                            val lon = transaction.child("lon").getValue().toString()
+                            val merchant = transaction.child("merchant").getValue().toString()
+                            val indication = if(transaction.child("isfraud").getValue().toString().toBoolean()) Indication.SUSPICIOUS else Indication.NORMAL
+
+                            val cardNumber = card.child("cardnum").getValue().toString()
+                            val dateOfBirth = card.child("dateofbirth").getValue().toString()
+                            val job = card.child("job").getValue().toString()
+                            val address = card.child("address").getValue().toString()
+                            val cityPopulation = card.child("citypop").getValue().toString()
+
+                            val data = ListModel(
+                                transactionId,
+                                cardNumber,
+                                dateOfBirth,
+                                job,
+                                address,
+                                cityPopulation,
+                                date,
+                                category,
+                                amount,
+                                lat,
+                                lon,
+                                merchant,
+                                indication
+                            )
+
+                            callback(Result.success(data))
+                        }
+                        .addOnFailureListener { exception ->
+                            callback(Result.failure(exception))
+                        }
+                }
+                else{
+                    callback(Result.failure(Exception("transaction id doesn't exist in database")))
+                }
+            }
+            .addOnFailureListener {exception ->
+                callback(Result.failure(exception))
+            }
     }
 }

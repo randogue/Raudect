@@ -13,8 +13,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class IndividualFragment : Fragment(R.layout.fragment_individual) {
 
-    private var testId: String? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -35,11 +33,8 @@ class IndividualFragment : Fragment(R.layout.fragment_individual) {
         val viewPager = view.findViewById<ViewPager2>(R.id.view_pager)
         val tabLayout = view.findViewById<TabLayout>(R.id.tab_layout)
 
-        //receive bundle from list fragment
-        testId = arguments?.getString("tid")
-
         //use adapter to populate tabs
-        val adapter = IndividualAdapter(childFragmentManager, lifecycle, testId)
+        val adapter = IndividualAdapter(childFragmentManager, lifecycle)
         viewPager.adapter = adapter
         TabLayoutMediator(tabLayout, viewPager) {tab, position ->
             tab.text = resources.getString(TABS_FIXED[position].tabTitle)

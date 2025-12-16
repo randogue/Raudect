@@ -21,7 +21,7 @@ import com.example.raudect.model.repository.FirebaseDatabaseRepository
 import kotlin.Int
 
 class ListFragment : Fragment() {
-    //shared activity viewmodel /w IndividualFragment
+    //shared activity viewmodel /w DetailFragment
     private val mainViewModel: MainViewModel by activityViewModels()
     //viewmodel
     private val listViewModel: ListViewModel by viewModels {
@@ -39,14 +39,7 @@ class ListFragment : Fragment() {
                 override fun onItemClick(list: ListModel, position : Int) {
                     //save transaction id of clicked item into shared vm
                     mainViewModel.setSelectTransactionId(list.transactionId)
-
-                    //when item element is clicked------------------------------------------ use mainviewmodel to share data snapshot instead
-                    val transactionId = list.transactionId
-
-                    val bundle = Bundle().apply {
-                        putString("tid", transactionId)
-                    }//-----------------------------------------------------------------------
-                    findNavController().navigate(R.id.action_listFragment_individualFragment, bundle)
+                    findNavController().navigate(R.id.action_listFragment_individualFragment)
                 }
             }
         )
@@ -88,11 +81,13 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //binding data to view (in this case to adapter)
         listAdapter.setData(emptyList<ListModel>())
         listViewModel.list.observe(viewLifecycleOwner){list->
             listAdapter.setData(list)
         }
 
+        //check and load list of transaction into vm
         try {
             listViewModel.checkList()
         }
