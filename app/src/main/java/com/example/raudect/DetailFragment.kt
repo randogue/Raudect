@@ -23,13 +23,6 @@ class DetailFragment : Fragment() {
     private val detailViewModel: DetailViewModel by viewModels {
         DetailViewModelFactory(FirebaseDatabaseRepository())
     }
-    //passed arg init
-    //private var transactionId: String? = null=================================
-
-    //database + auth init--------------------------------------------------------
-    private lateinit var cardOwnerRef: DatabaseReference
-    private lateinit var transactionRef: DatabaseReference
-    private lateinit var auth: FirebaseAuth//+++++++++++++++++++++++++++++++++++++++++++
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -1,6 +1,5 @@
 package com.example.raudect.model.repository
 
-import android.widget.Toast
 import com.example.raudect.model.Indication
 import com.example.raudect.model.ListModel
 import com.google.firebase.auth.FirebaseAuth
@@ -121,6 +120,28 @@ class FirebaseDatabaseRepository {
         }
     }
 
+    //CRUD Transaction --------------------------------------------------------------------------------------
+    fun addTransactionData(cardNum:String, date:String, category:String, amount:Float, lat:Float, lon:Float, merchant:String, isFraud: Boolean, callback: (Result<Unit>) -> Unit){
+        val data = mapOf<String, Any>(
+            "tid" to getTransactionRef().push().key.toString(),
+            "cardnum" to cardNum,
+            "date" to date,
+            "category" to category,
+            "amount" to amount,
+            "lat" to lat,
+            "lon" to lon,
+            "merchant" to merchant,
+            "isfraud" to isFraud
+        )
+        getTransactionRef().setValue(data)
+            .addOnSuccessListener {
+                callback(Result.success(Unit))
+            }
+            .addOnFailureListener { exception ->
+                callback(Result.failure(exception))
+            }
+    }
+
     fun getTransactionDataById(transactionId: String, callback: (Result<ListModel>) -> Unit){
         getTransactionRef().child(transactionId).get()
             .addOnSuccessListener { transaction ->
@@ -169,6 +190,36 @@ class FirebaseDatabaseRepository {
             }
             .addOnFailureListener {exception ->
                 callback(Result.failure(exception))
+            }
+    }
+
+    fun updateTransactionDataById(transactionId:String, cardNum:String, date:String, category:String, amount:Float, lat:Float, lon:Float, merchant:String, isFraud: Boolean, callback: (Result<Unit>) -> Unit){
+        val data = mapOf<String, Any>(
+            "cardnum" to cardNum,
+            "date" to date,
+            "category" to category,
+            "amount" to amount,
+            "lat" to lat,
+            "lon" to lon,
+            "merchant" to merchant,
+            "isfraud" to isFraud
+        )
+        getTransactionRef().child(transactionId).updateChildren(data)
+            .addOnSuccessListener {
+                callback(Result.success(Unit))
+            }
+            .addOnFailureListener { exception ->
+                callback(Result.failure(exception))
+            }
+    }
+
+    fun deleteTransactionDataById(transactionId: String, callback: (Result<Unit>) -> Unit){
+        getTransactionRef().child(transactionId).removeValue()
+            .addOnSuccessListener {
+                callback(Result.success(Unit))
+            }
+            .addOnFailureListener { e->
+                callback(Result.failure(e))
             }
     }
 }

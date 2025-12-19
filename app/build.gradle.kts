@@ -69,6 +69,10 @@ dependencies {
     //firebase database dependencies
     implementation(libs.firebase.database)
 
+    //machine learning deployment
+    implementation(libs.firebase.ml.modeldownloader.ktx)
+    implementation(libs.tensorflow.lite)
+
     //compose dependencies
     implementation("androidx.navigation:navigation-compose:2.7.4")
     implementation("androidx.compose.material3:material3:1.1.2")
