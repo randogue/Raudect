@@ -3,15 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
     <group
-        android:id="@+id/menu_top"
-        android:checkableBehavior="single">
-
-        <item
-            android:id="@+id/importFragment"
-            android:icon="@drawable/csv_file_import"
-            android:title="@string/drawer_importFragment_string" />
-    </group>
-    <group
         android:id="@+id/menu_middle"
         android:checkableBehavior="single">
 

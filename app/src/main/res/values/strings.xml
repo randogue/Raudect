@@ -80,7 +80,6 @@
     <string name="profileFragment_textEdit_editUsername_string">ex:John Doe</string>
     <string name="profileFragment_textView_greeting_string">Hello, %s!</string>
     <string name="profileFragment_button_editPicture_string">Take Photo</string>
-    <string name="profileFragment_button_delete_string">DELETE</string>
     <!--end-->
 
 
@@ -95,7 +94,6 @@
     <!--end-->
 
     <!--TODO: this is for Drawer Navigation-->
-    <string name="drawer_importFragment_string">Import CSV</string>
     <string name="drawer_profileFragment_string">Profile</string>
     <string name="drawer_aboutFragment_string">About App</string>
     <string name="drawer_aboutUsFragment_string">About Us</string>

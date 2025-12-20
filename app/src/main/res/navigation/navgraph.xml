@@ -72,11 +72,6 @@
         >
     </fragment>
     <fragment
-        android:id="@+id/importFragment"
-        android:name="com.example.raudect.ImportFragment"
-        android:label="Import CSV"
-        tools:layout="@layout/fragment_import" />
-    <fragment
         android:id="@+id/aboutFragment"
         android:name="com.example.raudect.AboutFragment"
         android:label="About Us"

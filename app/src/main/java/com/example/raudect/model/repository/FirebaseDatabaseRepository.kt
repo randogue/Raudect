@@ -1,5 +1,6 @@
 package com.example.raudect.model.repository
 
+import androidx.compose.ui.graphics.RectangleShape
 import com.example.raudect.model.CardModel
 import com.example.raudect.model.Indication
 import com.example.raudect.model.ListModel
@@ -122,6 +123,30 @@ class FirebaseDatabaseRepository {
     }
 
     //users CRUD
+    fun getUserData(callback: (Result<String>) -> Unit){
+        getUserRef().child(getCurrentUser()?.uid.orEmpty()).get()
+            .addOnSuccessListener {dataSnapshot ->
+                if(dataSnapshot.exists()){
+                    callback(Result.success(dataSnapshot.child("username").value.toString()))
+                }
+                else{
+                    callback(Result.failure(Exception("User not found")))
+                }
+            }
+            .addOnFailureListener { exception ->
+                callback(Result.failure(exception))
+            }
+    }
+
+    fun setUsername(username:String, callback: (Result<Unit>) -> Unit){
+        getUserRef().child(getCurrentUser()?.uid.orEmpty()).child("username").setValue(username)
+            .addOnSuccessListener {
+                callback(Result.success(Unit))
+            }
+            .addOnFailureListener { exception ->
+                callback(Result.failure(exception))
+            }
+    }
 
     //Create Read Card Data
     fun addCardData(cardNum: String,dateOfBirth:String, job:String, address:String, cityPop: Int, callback: (Result<Unit>) -> Unit){
