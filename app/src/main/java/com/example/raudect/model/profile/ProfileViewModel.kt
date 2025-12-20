@@ -4,7 +4,6 @@ import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.raudect.model.repository.FirebaseAuthRepository
 import com.example.raudect.model.repository.FirebaseDatabaseRepository
 import com.example.raudect.model.repository.ProfileRepository
 import kotlinx.coroutines.flow.MutableSharedFlow
