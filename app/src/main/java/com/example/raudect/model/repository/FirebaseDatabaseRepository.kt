@@ -1,5 +1,6 @@
 package com.example.raudect.model.repository
 
+import com.example.raudect.model.CardModel
 import com.example.raudect.model.Indication
 import com.example.raudect.model.ListModel
 import com.google.firebase.auth.FirebaseAuth
@@ -120,10 +121,68 @@ class FirebaseDatabaseRepository {
         }
     }
 
+    //users CRUD
+
+    //Create Read Card Data
+    fun addCardData(cardNum: String,dateOfBirth:String, job:String, address:String, cityPop: Int, callback: (Result<Unit>) -> Unit){
+        getCardDataByCardNum(cardNum){result ->
+            result
+                .onSuccess { card->
+                    if(card.cardNumber == null){
+                        val data = mapOf<String, Any>(
+                            "cardnum" to cardNum,
+                            "dateofbirth" to dateOfBirth,
+                            "job" to job,
+                            "address" to address,
+                            "citypop" to cityPop
+                        )
+                        getCardRef().child(cardNum).setValue(data)
+                            .addOnSuccessListener {
+                                callback(Result.success(Unit))
+                            }
+                            .addOnFailureListener { exception ->
+                                callback(Result.failure(exception))
+                            }
+                    }
+                    else{
+                        callback(Result.failure(Exception("Card Number Already Exist")))
+                    }
+                }
+                .onFailure { exception ->
+                    callback(Result.failure(exception))
+                }
+        }
+    }
+
+    fun getCardDataByCardNum(cardNum: String, callback: (Result<CardModel>) -> Unit){
+        getCardRef().child(cardNum).get()
+            .addOnSuccessListener { dataSnapshot ->
+                if(dataSnapshot.exists()){
+                    val data = CardModel(
+                        dataSnapshot.child("cardnum").value.toString(),
+                        dataSnapshot.child("dateofbirth").value.toString(),
+                        dataSnapshot.child("job").value.toString(),
+                        dataSnapshot.child("address").value.toString(),
+                        dataSnapshot.child("citypop").value.toString().toInt(),
+                    )
+                    callback(Result.success(data))
+                }
+                else{
+                    val data = CardModel(null,null,null,null,null)
+                    callback(Result.success((data)))
+                }
+            }
+            .addOnFailureListener { exception ->
+                callback(Result.failure(exception))
+            }
+    }
+
     //CRUD Transaction --------------------------------------------------------------------------------------
     fun addTransactionData(cardNum:String, date:String, category:String, amount:Float, lat:Float, lon:Float, merchant:String, isFraud: Boolean, callback: (Result<Unit>) -> Unit){
+        val newRowRef = getTransactionRef().push()
         val data = mapOf<String, Any>(
-            "tid" to getTransactionRef().push().key.toString(),
+            "tid" to newRowRef.key.toString(),
+            "uid" to (getCurrentUser()?.uid ?: ""),
             "cardnum" to cardNum,
             "date" to date,
             "category" to category,
@@ -133,7 +192,7 @@ class FirebaseDatabaseRepository {
             "merchant" to merchant,
             "isfraud" to isFraud
         )
-        getTransactionRef().setValue(data)
+        newRowRef.setValue(data)
             .addOnSuccessListener {
                 callback(Result.success(Unit))
             }

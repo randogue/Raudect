@@ -9,6 +9,8 @@ class MainViewModel(private val firebaseDatabaseRepository: FirebaseDatabaseRepo
     //shared variable
     private val _selectTransactionId = MutableLiveData<String>()
     val selectTransactionId: LiveData<String> = _selectTransactionId
+    private val _selectCardNum = MutableLiveData<String>()
+    val selectCardNum: LiveData<String> = _selectCardNum
 
     //activity's variable
     private val _currentUser = firebaseDatabaseRepository.getCurrentUser()
@@ -20,6 +22,11 @@ class MainViewModel(private val firebaseDatabaseRepository: FirebaseDatabaseRepo
     //save transactionId into vm for sharing between fragment
     fun setSelectTransactionId(transactionId: String){
         _selectTransactionId.value = transactionId
+    }
+
+    //save cardNum blah3, shared variable for inputfragment area section
+    fun setSelectCardNum(cardNum:String){
+        _selectCardNum.value = cardNum
     }
 
     //record first time user into database

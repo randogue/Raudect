@@ -4,6 +4,7 @@ import com.google.firebase.ml.modeldownloader.CustomModelDownloadConditions
 import com.google.firebase.ml.modeldownloader.DownloadType
 import com.google.firebase.ml.modeldownloader.FirebaseModelDownloader
 import org.tensorflow.lite.Interpreter
+import kotlin.math.roundToInt
 
 
 class FirebaseMachineLearningRepository {
@@ -13,7 +14,7 @@ class FirebaseMachineLearningRepository {
 
     private val firebaseModelDownloader: FirebaseModelDownloader = FirebaseModelDownloader.getInstance()
 
-    fun getMachineLearningModel(input: Array<FloatArray>, callback: (Result<Array<FloatArray>>)-> Unit){
+    fun getMachineLearningOutput(input: Array<FloatArray>, callback: (Result<Boolean>)-> Unit){
         //download model stored in firebase server
         firebaseModelDownloader.getModel("FraudDetector", DownloadType.LOCAL_MODEL, conditions)
             .addOnSuccessListener { model ->
@@ -28,14 +29,14 @@ class FirebaseMachineLearningRepository {
                     interpreter.run(input, output)
 
                     //pass result over to caller in callback
-                    callback(Result.success(output))
+                    callback(Result.success(output[0][0].roundToInt() == 1))
                 }
                 else{
-                    throw Exception("Machine Learning Model failed to load")
+                    callback(Result.failure(Exception("Machine Learning Model failed to load")))
                 }
             }
             .addOnFailureListener {exception ->
-                throw exception
+                callback(Result.failure(exception))
             }
     }
 }

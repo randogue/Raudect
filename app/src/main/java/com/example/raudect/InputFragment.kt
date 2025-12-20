@@ -11,25 +11,26 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import com.example.raudect.model.InputViewModel
+import com.example.raudect.model.input.InputRelatedViewModelFactory
+import com.example.raudect.model.input.InputViewModel
+import com.example.raudect.model.main.MainViewModel
+import com.example.raudect.model.repository.FirebaseDatabaseRepository
+import com.example.raudect.model.repository.FirebaseMachineLearningRepository
 import com.google.android.material.textfield.TextInputEditText
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import kotlinx.coroutines.launch
 
 class InputFragment : Fragment() {
     private var themedContext: Context? = null
 
-    //db & auth init
-    private lateinit var cardOwnerRef: DatabaseReference
-    private lateinit var auth: FirebaseAuth
-
-
-    //viewmodel
-    private val vm by lazy {
-        ViewModelProvider(this).get(InputViewModel::class.java)
+    private val mainViewModel: MainViewModel by activityViewModels()
+    private val inputViewModel: InputViewModel by viewModels {
+        InputRelatedViewModelFactory(FirebaseDatabaseRepository(), FirebaseMachineLearningRepository())
     }
 
 
@@ -53,71 +54,65 @@ class InputFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //db & auth instantiation
-        cardOwnerRef = FirebaseDatabase.getInstance().getReference("card_owner_info")
-        auth = FirebaseAuth.getInstance()
-        val user = auth.currentUser
-
-
         //input view holding
         //personal
         val pCardNumber = view.findViewById<TextInputEditText>(R.id.inputFragment_inputEdit_cardNumber_layout)
 
+        //to catch message from vm
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+                inputViewModel.toast.collect { message->
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
 
-        //View Model Implementation
-        //observe view model
-        vm.ccnum.observe(viewLifecycleOwner){
+        //form retention
+        //Observe...
+        inputViewModel.cardNum.observe(viewLifecycleOwner){
             if(pCardNumber.text.toString() != it){
                 pCardNumber.setText(it)
             }
         }
-        //set input into view model on change
-        pCardNumber.addTextChangedListener {
-            vm.setText(pCardNumber.text.toString())
+        //set...
+        pCardNumber.addTextChangedListener{
+            inputViewModel.setCardNum(pCardNumber.text.toString())
         }
 
-
-        //set on click for submit
+        //set on click for checking if card number exist in database
         view.findViewById<Button>(R.id.inputFragment_button_submit)
             .setOnClickListener {
-                //the new stuff
-                if(pCardNumber.text.toString().isNotBlank()){
-                    cardOwnerRef.child(pCardNumber.text.toString()).get()
+                inputViewModel.checkCardNum(pCardNumber.text.toString())
+            }
 
-                        //what to do once the task from get() is finished
-                        .addOnSuccessListener { result ->
-                            if(result.exists()){
-                                val bundle = Bundle()
-                                bundle.putString("cardnum", pCardNumber.text.toString())
-                                findNavController().navigate(R.id.action_inputFragment_inputTransactionFragment, bundle)
-                            }
-                            else{//handle cardnumber not found in db
-                                //alert dialog
-                                val builder = AlertDialog.Builder(context)
-                                builder.setTitle("Information not Found")
-                                builder.setMessage("Register card number information?")
+        //navigation logic
+        inputViewModel.destination.observe(viewLifecycleOwner){destination->
+            if(!destination.isNullOrEmpty()){
+                if(destination == "InputTransaction"){
+                    mainViewModel.setSelectCardNum(pCardNumber.text.toString())
+                    findNavController().navigate(R.id.action_inputFragment_inputTransactionFragment)
+                }
+                if(destination == "Register"){
+                    val builder = AlertDialog.Builder(context)
+                    builder.setTitle("Information not Found")
+                    builder.setMessage("Register card number information?")
 
-                                //when yes
-                                builder.setPositiveButton("Yes"){dialog, _->
-                                    val bundle = Bundle()
-                                    bundle.putString("cardnum", pCardNumber.text.toString())
-                                    //move to register frag with 'cardnum' bundle
-                                    findNavController().navigate(R.id.action_inputFragment_registerFragment, bundle)
-                                    dialog.dismiss()
-                                }
+                    //when yes
+                    builder.setPositiveButton("Yes"){dialog, _->
+                        mainViewModel.setSelectCardNum(pCardNumber.text.toString())
+                        findNavController().navigate(R.id.action_inputFragment_registerFragment)
+                        dialog.dismiss()
+                    }
 
-                                //when no
-                                builder.setNegativeButton("No"){dialog, _->
-                                    dialog.dismiss()
-                                }
+                    //when no
+                    builder.setNegativeButton("No"){dialog, _->
+                        dialog.dismiss()
+                    }
 
-                                builder.show()
-                            }
-                        }
-                        .addOnFailureListener { e->
-                            Toast.makeText(context, "Query Error: ${e.message}", Toast.LENGTH_LONG).show()
-                        }
+                    builder.show()
                 }
             }
+        }
+
     }
 }

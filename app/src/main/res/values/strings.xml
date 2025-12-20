@@ -22,7 +22,7 @@
 
     <!--TODO: this is for fragment_input_transaction.xml-->
     <string name="inputTransactionFragment_textView_title_string">Transaction</string>
-    <string name="inputTransactionFragment_inputLayout_transactionTime_string">Date(dd/mm/yyyy)</string>
+    <string name="inputTransactionFragment_inputLayout_transactionTime_string">Select Time</string>
     <string name="inputTransactionFragment_inputLayout_transactionCategory_string">Category</string>
     <string name="inputTransactionFragment_inputLayout_transactionAmount_string">Amount($USD)</string>
     <string name="inputTransactionFragment_inputLayout_transactionLatitude_string">Latitude</string>

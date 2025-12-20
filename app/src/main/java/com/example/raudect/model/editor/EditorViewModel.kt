@@ -15,7 +15,7 @@ class EditorViewModel(
     private val _data = MutableLiveData<ListModel>()
     val data: LiveData<ListModel> = _data
 
-    //event
+    //event TODO need to be implemented in the other viewmodel
     private val _toast = MutableSharedFlow<String>(replay = 0, extraBufferCapacity = 1)
     val toast: SharedFlow<String> = _toast
 
