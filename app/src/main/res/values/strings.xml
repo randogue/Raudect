@@ -56,6 +56,7 @@
     <!--TODO: this is for fragment_editor.xml-->
     <string name="editorFragment_textView_title_string">EDIT DATA</string>
     <string name="editorFragment_button_submit_string">APPLY</string>
+    <string name="editorFragment_button_delete">DELETE</string>
     <!--borrowed a lot from fragment_input.xml-->
     <!--end-->
 

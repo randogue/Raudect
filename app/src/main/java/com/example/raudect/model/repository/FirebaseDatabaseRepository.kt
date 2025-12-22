@@ -23,6 +23,8 @@ class FirebaseDatabaseRepository {
     //getter setter
     fun getCurrentUser() = auth.currentUser
 
+    
+
     //querys
     //get a row at target (identifiable by key), then callback
     fun getQuery(ref: DatabaseReference, key: String?, callback: (Result<DataSnapshot>) -> Unit){

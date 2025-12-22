@@ -217,7 +217,7 @@
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:text="@string/profileFragment_button_delete_string"
+                    android:text="@string/editorFragment_button_delete"
                     android:gravity="center"
                     android:backgroundTint="@color/suspicious"
                     android:textColor="@color/primary"
