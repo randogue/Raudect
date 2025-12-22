@@ -104,7 +104,9 @@ class ProfileFragment : Fragment() {
 
         //form retention
         profileViewModel.usernameInput.observe(viewLifecycleOwner){ username->
-            editUsername.setText(username)
+            if (editUsername.text.toString() != username){
+                editUsername.setText(username)
+            }
         }
         editUsername.addTextChangedListener { username->
             profileViewModel.setUsernameInput(username.toString())
